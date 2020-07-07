@@ -1,0 +1,167 @@
+<!-- MODAL -->
+
+  <div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
+
+      <div class="modal-dialog modal-xl" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h5 class="modal-title">Como Eu Uso?</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+
+                      <span>&times;</span> 
+
+                  </button>
+              </div>
+
+              <div class="modal-body">
+                  
+
+                      <div class="row">
+
+                        <div class="col-12 text-center">
+
+                          <h1 class="display-4">Tem dúvida?</h1>
+                          <p class="lead">Leia os materiais a seguir para aprender como usar nosso site.</p>
+                          <hr>
+
+                        </div>
+
+                      </div>
+                      <div class="row">
+
+                        <div class="col-12">
+
+                          <ul class="nav nav-pills justify-content-center mb-3 " id="pills-nav" role="tablist">
+
+                            <li class="nav-item mx-2">                            
+                              <a class="nav-link active btn-outline-success" id="nav-pills-01" data-toggle="pill" href=#nav-item-01>Cadastro</a>
+                            </li>
+
+                            <li class="nav-item mx-2">                            
+                              <a class="nav-link btn-outline-success" id="nav-pills-02" data-toggle="pill" href=#nav-item-02>O Que Eu Faço?</a>
+                            </li>
+
+                            
+
+                          </ul>
+
+                          <div class="tab-content" id="nav-pills-content">
+
+                            <div class="tab-pane fade show active text-center" id="nav-item-01" role="tabpanel">
+
+                              <a>Primeiro preciso saber como deseja se cadastrar.</a>
+                                <nav id="navbar-example2 justify-content-center" class="navbar navbar-light bg-light">
+                                  <ul class="nav nav-pills">
+                                    <li class="nav-item active mx-2">
+                                      <a class="nav-link btn-success" href="#secretaria">Secretaria</a>
+                                    </li>
+                                    <li class="nav-item mx-2">
+                                      <a class="nav-link btn-success" href="#escola">Escola</a>
+                                    </li>
+                                    <li class="nav-item mx-2">
+                                      <a class="nav-link btn-success" href="#professor">Professor</a>
+                                    </li>
+                                     </ul>
+                                </nav>
+                                <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                                  <h4 id="secretaria">Secretaria</h4>
+                                  {% include 'texto/manual/cadastro_secretaria'%}
+                                  <h4 id="escola">Escola</h4>
+                                  {% include 'texto/manual/cadastro_escola'%}
+                                  <h4 id="professor">Professor</h4>
+                                  {% include 'texto/manual/cadastro_professor'%}
+                                    <img class="image-fluid" src="/media/prof1.png" style="max-width: 95%">
+                                    {% include 'texto/manual/cadastro_professor1'%}
+                                    <hr>
+                                    <img class="image-fluid" src="/media/prof2.png" style="max-width: 95%">
+                                    <img class="image-fluid" src="/media/prof3.png" style="max-width: 95%">
+                                    {% include 'texto/manual/cadastro_professor2'%}
+                                    <hr>
+                                    <img class="image-fluid" src="/media/prof4.png" style="max-width: 95%">
+                                    {% include 'texto/manual/cadastro_professor3'%}
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade  text-center" id="nav-item-02" role="tabpanel">
+
+                              <a>Como você se cadastrou?</a>
+                                
+                                <nav id="navbar-example3 justify-content-center" class="navbar navbar-light bg-light">
+                                  <ul class="nav nav-pills">
+                                    <li class="nav-item active mx-2">
+                                      <a class="nav-link btn-success" href="#secretaria2">Secretaria</a>
+                                    </li>
+                                    <li class="nav-item mx-2">
+                                      <a class="nav-link btn-success" href="#escola2">Escola</a>
+                                    </li>
+                                    <li class="nav-item mx-2">
+                                      <a class="nav-link btn-success" href="#professor2">Professor</a>
+                                    </li>
+                                     </ul>
+                                </nav>
+                                
+                                <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                                  <h4 id="secretaria2">Secretaria</h4>
+                                  <img class="image-fluid" src="/media/sec1.png" style="max-width: 95%">
+                                  {% include 'texto/manual/faco_secretaria1'%}
+                                    
+                                  <hr>
+                                    
+                                  <img class="image-fluid" src="/media/sec2.png" style="max-width: 95%">
+                                    <img class="image-fluid" src="/media/sec3.png" style="max-width: 95%">
+                                    {% include 'texto/manual/faco_secretaria2'%}
+                                    
+                                    <hr>                             
+                                                                    
+                                    <h4 id="escola2">Escola</h4>
+                                    <img class="image-fluid" src="/media/esc1.png" style="max-width: 95%">
+                                    
+                                    {% include 'texto/manual/faco_escola1'%}
+                                    <hr>
+                                    
+                                    <img class="image-fluid" src="/media/esc2.png" style="max-width: 95%">
+                                    <img class="image-fluid" src="/media/esc3.png" style="max-width: 95%">
+                                    
+                                    {% include 'texto/manual/faco_escola2'%}
+                                    <hr>
+                                  <h4 id="professor2">Professor</h4>
+                                    <img class="image-fluid" src="/media/prof5.png" style="max-width: 95%">
+                                    
+                                    {% include 'texto/manual/faco_prof1'%}
+                                    <hr>
+                                    
+                                    <img class="image-fluid" src="/media/prof6.png" style="max-width: 95%">
+                                    <img class="image-fluid" src="/media/prof6-2.png" style="max-width: 95%">
+                                    {% include 'texto/manual/faco_prof2'%}
+                                    
+                                    
+                                    <hr>
+                                    
+                                    <img class="image-fluid" src="/media/prof7.png" style="max-width: 95%">
+                                    {% include 'texto/manual/faco_prof3'%}
+                                </div>
+
+                            </div>
+
+                            
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                    
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+
+              </div>
+          </div>
+
+      </div>
+
+  </div>

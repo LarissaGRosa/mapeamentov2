@@ -1,0 +1,5 @@
+djangorestframework
+Django~=2.2.4
+plotly
+Pillow
+django-crispy-forms

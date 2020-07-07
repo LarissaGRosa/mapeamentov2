@@ -1,0 +1,163 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+      
+
+    <title>Notícias</title>
+  </head>
+  <body>
+      
+      
+      <div class="mybg" style="min-height: 100vh">
+      
+          {% include 'nav-bar.html'%}
+        <div class="container-fluid justify-content-center">  
+            <div class="row text-black-50 my-2 justify-content-center">
+              <h1> Notícias </h1>
+              </div>
+            
+            
+                  <div class="row justify-content-center">
+                      <div class="container-fluid">
+                              <div class="row justify-content-sm-center">
+
+                                
+
+                                  <div class="card mb-5 border-0 shadow p-3 mb-5 bg-white rounded mx-3  " style="min-width: 25%; max-width: 25%; min-height: 10%">
+
+                                    <img class="card-img-top img-fluid" src="/media/Aprendendo.png" >
+
+
+                                    <div class="card-body">
+
+                                      <h4 class="card-title">Como Usar?</h4>
+                                      <p class="card-text">Clique em Ver mais e aprenda a usar nosso site!</p>
+                                    <button href="#" class="card-link btn btn-success" data-toggle="modal" data-target="#siteModal">Ver Mais</button>
+
+
+                                    </div>
+
+                                  </div>
+                                    {% for noticia in noticias %}
+                                 
+
+                                      <div class="card mb-5 bg-white rounded mx-3   " style="min-width: 25%; max-width: 25%; min-height: 10%">
+
+                                        <div class="card-body">
+                                          <img src="{{ noticia.foto.url }}" style="height:200px;" class="card-img-top">
+                                          <h4 class="card-title text-dark">{{ noticia.titulo }}</h4>
+                                          <p class="card-text">{{ noticia.texto }}</p>
+
+                                    <button type="button" class="btn btn-success" onclick='posts(this)' value="{{ noticia.id }}" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Veja Mais
+                                    </button>
+
+
+
+                                        </div>
+
+                                     
+
+
+
+                                </div>{% endfor %}
+                                  
+                                  
+
+
+                              </div>
+                      </div>
+                      
+                      
+
+                  </div>
+            </div>
+            
+            
+    
+      
+      </div>
+      
+          {% include 'fotters.html'%}
+      
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Notícia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body mybg align-items-center">
+         <h1 id="titulo" class="display-4">Titulo vem aqui!</h1>
+         <br>
+         <br>
+         <p style="text-align:justify;" id="texto">Aqui vai o texto!</p>
+         <br>
+         <div class="row">
+             <div class="col-md-4" id="data">Data</div>
+             <div class="col-md-4" id="autor">Autor</div>
+
+         </div>
+            
+        </div>
+        <div class="modal-footer"></div>
+               
+    </div>
+  </div>
+</div>
+      
+      {% include 'resultado/modal_user.html'%}
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+  <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+  <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+   {% csrf_token %}
+   <script>
+
+    function posts(obj){
+       obj1 = obj.value
+       $.ajax({
+                type:'POST',
+                url:"{% url 'noticias:getnoticias' %}",
+                data:{
+
+                    id : obj1,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+            success:function(json){
+              document.getElementById('texto').innerHTML = json.texto;
+              document.getElementById('titulo').innerHTML = json.titulo;
+              document.getElementById('data').innerHTML = json.data;
+              document.getElementById('autor').innerHTML = json.autor;
+               },
+            error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+        return obj1
+    };
+
+</script>
+
+  </body>
+</html>

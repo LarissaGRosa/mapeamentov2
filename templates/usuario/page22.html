@@ -1,0 +1,256 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+  <html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+
+    <title>Perfil</title>
+  </head>
+  <body>
+
+      <div class="mybg  justify-content-center" style="min-height: 100vh">
+        {% include 'nav-bar.html' %}
+            
+              <div class="container-fluid">
+                  <div class="row justify-content-center">
+                        
+                            <h2 class="text-dark"><br>{{escola.nome}}</h2>
+                  </div>
+                  <div class="row justify-content-center">
+                            <h3 class="text-dark">{{ escola.dependencia }}<br>{{ escola.municipio }}</h3>
+                  </div>
+               
+                <div class="row justify-content-center">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+                            Ver dados da escola
+                    </button>
+                </div>
+          </div>
+      </div>
+      
+<section class="features4 cid-rYq1qm7z53" id="features4-i">      
+      
+<div class="container-fluid my-5">
+  <div class="row justify-content-sm-center">
+
+    <div class="col-sm-6 col-md-4">
+
+      <div class="card mb-5 bg-white rounded">
+
+        <div class="card-body">
+
+          {{ g1|safe }}
+          
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="col-sm-6 col-md-4">
+
+      <div class="card mb-5 bg-white rounded">
+
+        <div class="card-body ">
+        
+            {{ g2|safe }}
+            
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+      </section>
+      <section class="services6 cid-rYq1IkyhOa" id="services6-k">
+    <!---->
+
+    <!---->
+    <!--Overlay-->
+
+    <!--Container-->
+    <div class="container">
+        <div class="row">
+            <!--Titles-->
+            <div class="title col-12">
+                <h2 class="align-left mbr-fonts-style m-0 display-1">Lista de professores</h2>
+
+            </div>
+            <!--Card-1-->
+            {% for p in professores %}
+            <div class="card col-12 pb-5">
+                <div class="card-wrapper media-container-row media-container-row">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-12 col-md-2">
+                                <!--Image-->
+                                <div class="mbr-figure">
+                                    <!--<img src="assets/images/humanpictos-122x122.png" alt="Mobirise" title="">-->
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-10">
+                                <div class="wrapper">
+                                    <div class="top-line pb-3">
+                                        <h4 class="card-title mbr-fonts-style display-5">
+                                            {{ p.professor.user.user.username }}
+                                        </h4>
+                                        <p class="mbr-text cost mbr-fonts-style m-0 display-5">
+                                            {% if p.isAceito == True %}
+                                            <button type="button" class=" btn-primary" onclick='trocarvinculo(this)' value='{{p.id}}' >Desativar</button>
+                                            {% else %}
+                                            <button type="button" class=" btn-primary" onclick='trocarvinculo(this)' value='{{p.id}}' >Ativar</button>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="bottom-line">
+                                        <p class="mbr-text mbr-fonts-style display-7">
+                                            {{ p.professor.leciona }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+          
+        {% include 'fotters.html' %}
+      
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dados da escola</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div data-form-alert="true"><div hidden="" data-form-alert-success="true">Thanks for filling out form!</div></div>
+                <form method="POST" id="post-form4" data-form-title="Novo professor">
+                    {% csrf_token %}
+                    <input type="hidden" value="6HWg9qVFZM40FHR/0hFIyq1WOP2oEDIBRDeMuXYK8F8hr1ZHFnf9JbLvgFDlIIzcxc3iGZiJ6rUz/UtcXMk9fnKpnu5byLkIaZ75Z1N4T2Fb2oKOyp3tyuSIn9ZF1bs7" data-form-email="true">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome1" required="" placeholder="Nome da escola*" data-form-field="nome" value="{{ escola.nome }}">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="regiao" required="" placeholder="Região*" data-form-field="regiao" value="{{ escola.regiao }}">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="uf" placeholder="Estado" data-form-field="uf" value="{{escola.uf}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="municipio" placeholder="Município" data-form-field="{{escola.municipio}}">
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="cod_municipio" placeholder="Código do município" data-form-field="cod_municipio" value="{{ escola.cod_municipio}}">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" id="dependencia" rows="7" placeholder="Dependência administrativa" data-form-field="dependencia">{{escola.dependencia}}</textarea>
+                    </div>
+
+
+
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit"  class="btn btn-primary">Salvar</button>
+      </div>
+         </form>
+          </div>
+    </div>
+  </div>
+</div>
+
+      
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    {% csrf_token %}
+<script>
+  function trocarvinculo(obj){
+
+       $.ajax({
+                type:'POST',
+                url:'{% url "perfil:mudarvinculo" %}',
+                data:{
+                    id : obj.value,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+            success:function(json){
+              alert('Sucesso');
+               },
+            error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+        return obj.value
+
+ };
+</script>
+ <script>
+    $(document).on('submit', '#post-form4',function(e){
+
+    $.ajax({
+        type:'POST',
+        url:'{% url "perfil:editescola" %}',
+        data:{
+            nome:$('#nome1').val(),
+            regiao:$('#regiao').val(),
+            municipio:$('#municipio').val(),
+            cod_municipio:$('#cod_municipio').val(),
+            uf:$('#uf').val(),
+            dependencia:$('#dependencia').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+
+           alert('Sucesso!');
+           },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
+</script>
+  
+      </body>
+  </html>

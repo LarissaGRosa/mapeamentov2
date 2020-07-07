@@ -1,0 +1,149 @@
+{%load static%}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    
+      
+
+    <title>Login</title>
+  </head>
+  <body>
+      
+      <div class="mybg" style="min-height: 100vh">
+      
+          {% include 'nav-bar.html'%}
+          
+          <div class="container">
+
+              <div class="row justify-content-center">
+
+                  <div class="col-12">
+
+                      <h1 class="display-4 text-center my-5" style="color: dimgrey">Login</h1>
+
+                  </div>
+
+                  <div class="row justify-content-center mb-5">
+
+                      <div class="col-sm-12">
+
+                          <form action="{% url 'perfil:do_login' %}" method="POST" class="form-signin" >
+                              
+                                {% csrf_token  %}
+
+                              <div class="form-row">
+
+                                  <div class="form-group col-sm-12">
+
+                                      <label>Usuário </label>
+                                      <input type="text" class="form-control" name="username" placeholder="Nome de usuário">  
+
+                                  </div>
+                              </div>
+
+                              <div class="form-row">
+
+                                  <div class="form-group col-sm-12 ">
+
+                                      <label>Senha</label>
+                                      <input type="password" class="form-control" name="password" placeholder="Senha">
+
+                                  </div>
+                              </div>
+
+                              <div class="form-row">
+
+                                  <div class="col-sm-12">
+
+                                      <button type="submit" class="btn btn-success">Entrar</button>
+                                  </div>
+
+                              </div>
+                              
+                              <div class="form-row mt-2">
+
+                                  <div class="col-sm-12">
+
+                                        <a  class="btn btn-dark" href="#" data-toggle="modal" data-target="#siteModal">Cadastrar-se</a>
+
+
+                                  </div>
+                              </div>
+
+
+
+
+                          </form>
+
+                      </div>
+
+                  </div>
+
+              </div>
+        </div>    
+      </div>
+      
+              <!-- MODAL -->
+
+  <div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
+
+      <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h5 class="modal-title">Quer Se Cadastrar?</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+
+                      <span>&times;</span> 
+
+                  </button>
+              </div>
+
+              <div class="modal-body">
+                  <p>Se você quer se cadastrar como secretaria, entre em contato conosco pelo email...</p>
+                  <p>Se você é professor e quer se cadastrar, clique no botão. <a class="btn btn-outline-success" role="button" href="{% url 'perfil:cadastro' %}">Cadastrar</a></p>
+                  <p>Se você quer cadastrar uma escola, entre em contato com a secretaria de seu município, pois são eles quem irão te cadastrar.</p>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+      
+      
+   
+      
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    <script>
+    
+        $(function () {
+          
+            $('[data-toggle="popover"]').popover()
+          
+        })
+        
+    </script>
+  </body>
+</html>

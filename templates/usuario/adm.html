@@ -1,0 +1,229 @@
+
+<!doctype html>
+{%load static%}
+{% load crispy_forms_tags %}
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+
+
+
+
+    <title>Administração 1</title>
+  </head>
+  <body>
+
+      <div class="mybg" style="min-height: 100vh">
+
+          {% include 'nav-bar.html'%}
+          <div class="container-fluid " >
+
+              <div class="row justify-content-center" >
+
+              <div class="col-12 text-center my-5" >
+
+                  <h1 class="display-2 text-dark">Perguntas</h1>
+                     <p class="lead text-dark">Adicione ou exclua perguntas no sistema, para o item perspectivas da pesquisa!</p>
+              </div>
+
+          </div>
+
+          </div>
+
+
+
+      </div>
+      <div class="row justify-content-center" style="padding:20px">
+       <div class="col-md-12  text-center"> <h1 class="display-4"> Criar perguntas </h1></div>
+           <div class="col-md-8">
+                <form method="POST" id="pergunta-form">
+                                          {% csrf_token %}
+               <h6> Questionário </h6>
+               <input type="number" class="form-control" id="questionario" required="" placeholder="Dê a sua pergunta um número, para que possamos agrupá-la*" data-form-field="questionario">
+               <br>
+               <h6> Questão </h6>
+               <input type="text" class="form-control" id="questao" required="" placeholder="Escreva sua questão*" data-form-field="questão">
+               <br>
+               <h6>Tipo de pergunta:</h6>
+                 <select multiple class="form-control" id="tipop">
+                                      <option value="1">Dissertativa</option>
+                                      <option value="2">Múltipla escolha</option>
+
+                                    </select>
+               <br>
+               <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enviar</button>
+
+
+                </form>
+
+           </div>
+           <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div style="padding:20px">
+                            <div id="terminar">
+                                <div class="row justify-content-center mb-5">
+                                    <div class="col-sm-12" style="text-align:center">
+                                        <h4>
+                                            <ol>
+                                                <li>Esta pergunta precisa de mais configurações</li>
+                                                <li>Quando concluir suas alternativas, clique em terminar.</li>
+                                            </ol>
+                                        </h4>
+                                        <form method="POST" id="alternativa-form">
+                                            {% csrf_token %}
+                                            <div class="row justify-content-center">
+
+                                                <div class="form-row col-sm-6 justify-content-center">
+                                                    <label for="exampleFormControlTextarea1" class="text-dark">Alternativa</label>
+                                                    <input type="text" class="form-control" id="exampleFormControlTextarea1">
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center col-sm-12 my-2">
+                                                <button type="submit" value='0' id="getid" class="btn btn-dark mb-3">Adicionar</button>
+                                                <div id="sucessoa"><p>Sucesso!</p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+      </div>
+
+
+
+      <div class="row justify-content-center" style="padding:20px;">
+          <div class="col-md-8">
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Questão</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Editar</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in perguntas %}
+    <tr>
+      <th scope="row">{{ p.id }}</th>
+      <td>{{ p.questao }}</td>
+        {% if p.isAlternativa == True %}
+      <td>Múl. Escolha</td>
+        {% else %}
+        <td>Dissertativa</td>
+        {% endif %}
+      <td><button type="button" class=" btn-primary" onclick='desativar_pergunta(this)' value='{{p.id}}' >Excluir</button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+      </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+      <script>
+            $('#sucessoa').hide();
+            $('#terminar').hide();
+
+      </script>
+    <script>
+
+        $(function () {
+
+            $('[data-toggle="popover"]').popover()
+
+        })
+
+    </script>
+   <script>
+    $(document).on('submit', '#pergunta-form',function(e){
+      e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'{% url "perfil:novapergunta" %}',
+        data:{
+            questionario:$('#questionario').val(),
+            questao:$('#questao').val(),
+            selectedValue : $("#tipop :selected").val(),
+
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+            document.getElementById("pergunta-form").reset();
+            if (json.tipo == "1"){
+                $('#terminar').append('<h4>A pergunta '+json.pergunta+' foi cadastrada com sucesso, por ser uma questão dissertativa não é necessário outras configurações</h4>');
+                }
+            if (json.tipo == "2"){
+                   $('#getid').val(json.id);
+                  $('#terminar').show();
+               }
+
+           },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
+</script>
+  <script>
+       $(document).on('submit', '#alternativa-form',function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:'{% url "perfil:novaalternativa" %}',
+            data:{
+
+                texto:$('#exampleFormControlTextarea1').val(),
+                pk:$('#getid').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+        success:function(json){
+            document.getElementById("alternativa-form").reset();
+            $("#sucessoa").show()
+            setTimeout(function(){
+                $('#sucessoa').hide()
+            }, 2000)
+
+           },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+   });
+
+  </script>
+  <script src="{% static 'jquery/funcao.js' %}"></script>
+
+  </body>
+</html>

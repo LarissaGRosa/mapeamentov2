@@ -1,0 +1,321 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+      
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Home</title>
+  </head>
+  <body>
+      
+      <div class="mybg" style="min-height: 100vh">
+      
+          {% include 'nav-bar.html'%}
+          <br><br><br>
+          <div class="explic">
+      
+              
+                  <div class="container">
+                      <div class="row">
+                      <div class="col-md-12">
+                          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="min-height:500px; max-height: 500px;">
+                          <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                          </ol>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                             <div class="row justify-content-center align-items-center">
+                                  <div class="col-lg-4 col-centered">
+                                     <h1 class="display-4"> O que somos? </h1>
+                                     <h4  style="text-align:justify;">
+                                         {% include 'texto/home/o_que_somos'%}
+                                      </h4>
+                                 </div>
+                                 <div class="col-lg-4 justify-content-center align-items-center" align="center">
+                                     <img src="/media/class.png"  height="350px" class="img-responsive" align="center">
+                                 </div>
+
+
+                             </div>
+
+                            </div>
+                               <div class="carousel-item">
+                             <div class="row justify-content-center align-items-center">
+                                  <div class="d-none d-md-block col-lg-4 col-centered">
+                                     <h1 class="display-4"> Como? </h1>
+                                     <h4  style="text-align:justify;">
+                                         {% include 'texto/home/como'%}
+                                      </h4>
+                                 </div>
+                                 <div class="col-lg-4 justify-content-center align-items-center" align="center">
+                                     <img src="/media/student.png"  height="300px" class="img-responsive" align="center">
+                                 </div>
+
+
+                             </div>
+
+                            </div>
+                            <div class="carousel-item ">
+                             <div class="row justify-content-center align-items-center">
+                                 
+                                    <img src="/media/learning.png"  class="img-responsive h-100" >
+                                    <div class="carousel-caption d-none d-md-block">
+
+                                        <h1 class="text-dark">Como Usar?</h1>
+                                        <p class="lead text-dark">Clique em Ver Mais... E aprenda a usar nosso site!ㅤ<a href="{% url 'noticias:posts' %}" class="badge badge-dark my-2">Ver Mais...</a> </p>
+                             </div>
+
+                            </div>
+                              </div>
+
+
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Anterior</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Próximo</span>
+                          </a>
+                        </div>
+
+
+                      </div>
+
+                      </div>
+                  </div>
+
+
+
+
+
+
+
+              </div>
+       
+          
+      </div>
+        
+      
+      <div class="jumbotron jumbotrom-fluid">
+      
+          <div class="container">
+          
+              <div class="row">
+              
+                  <div class="col-12 text-center">
+                  
+                      <h1 class="display-4">Conheça Mais Sobre Nós</h1>
+                      <hr>
+                  
+                  </div>
+                  
+              </div>
+              <div class="row">
+              
+                  <div class="col-12">
+                  
+                      <ul class="nav nav-pills justify-content-center mb-3" id="pills-nav" role="tablist">
+                      
+                          <li class="nav-item">                            
+                              <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href=#nav-item-01>Como Surgiu a Ideia?</a>
+                          </li>
+                          
+                          <li class="nav-item">                            
+                              <a class="nav-link" id="nav-pills-02" data-toggle="pill" href=#nav-item-02>O Que Esperamos?</a>
+                          </li>
+                          
+                          <li class="nav-item">                            
+                              <a class="nav-link" id="nav-pills-03" data-toggle="pill" href=#nav-item-03>Quem Criou?</a>
+                          </li>
+                          
+                      </ul>
+                      
+                      <div class="tab-content" id="nav-pills-content">
+                      
+                          <div class="tab-pane fade show active text-center" id="nav-item-01" role="tabpanel">
+                              
+                              <div class="row justify-content-center">
+                                  
+                                  <div class="col-sm-6">
+                                  
+                                      <p>1</p>
+                                  
+                                  </div>
+                              
+                              </div>
+                          
+                              {% include 'texto/home/como_surgiu'%}
+                          
+                          </div>
+                          
+                          <div class="tab-pane fade  text-center" id="nav-item-02" role="tabpanel">
+                              <div class="row justify-content-center">
+
+                                  <div class="col-sm-6">
+
+                                      <p>2</p>
+
+                                  </div>
+
+                              </div>
+
+                          
+                              {% include 'texto/home/o_que_esperamos'%}
+                          
+                          </div>
+                          
+                          <div class="tab-pane fade text-center " id="nav-item-03" role="tabpanel">
+                              <div class="row justify-content-center">
+
+                                  <div class="col-sm-6">
+
+                                      <p>3</p>
+
+                                  </div>
+
+                              </div>
+
+                          
+                              {% include 'texto/home/quem_criou'%}
+                          </div>
+                          
+                      </div>
+                  
+                  </div>
+                  
+              </div>
+          </div>
+          
+      </div>
+      
+      <div class="container-fluid">
+      
+          <div class="row justify-content-center">
+          
+              <div class="col-12">
+              
+                  <h1 class="display-4 text-center my-5"><i class="fas fa-paper-plane text-success"></i>Mande Suas Dúvidas Aqui</h1>
+              
+              </div>
+              
+              <div class="row justify-content-center mb-5">
+              
+                  <div class="col-sm-12 col-md-10 col-lg-8">
+                  
+                      <form method="post" id="form_email">
+                      {% csrf_token %}
+                          <div class="form-row">
+                              
+                              <div class="form-group col-sm-6">
+                          
+                                  <label for="inputNome">Seu Nome</label>
+                                  <input type="text" class="form-control" id="inputNome" placeholder="Nome">  
+                                  
+                              </div>
+                          
+                              
+                              <div class="form-group col-sm-6">
+                              
+                                  <label for="inputSobrenome">Seu Sobrenome</label>
+                                  <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome">
+                              
+                              
+                              </div>
+                          </div>
+                              
+                          <div class="form-row">
+                              
+                              <div class="form-group col-sm-12">
+                              
+                                  <label for="inputEnd">Seu Email</label>
+                                  <input type="email" class="form-control" id="inputEnd" placeholder="Email">
+                              
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Dúvida</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
+
+                          
+                          <div class="form-row">
+                          
+                              <div class="col-sm-12">
+                              
+                                  <button type="submit" class="btn btn-primary">Enviar</button>
+                                  
+                              </div>
+                              <div class="col-sm-12" id="sucessoemail"><h4 class="display-4">Mensagem enviada com sucesso!!</h4></div>
+                              <div class="col-sm-12" id="erroemail"><h4 class="display-4">Erro ao enviar mensagem!!!!</h4></div>
+
+                          </div>
+                          
+                          
+                          
+                      
+                      </form>
+                  
+                  </div>
+              
+              </div>
+          
+          </div>
+      </div>
+      
+      {% include 'fotters.html'%}
+          
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+      <script>
+          $('#sucessoemail').hide();
+          $('#erroemail').hide();
+
+      </script>
+     <script>
+    $(document).on('submit', '#form_email',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'{% url "noticias:home" %}',
+        data:{
+            nome:$('#inputNome').val(),
+            sobrenome:$('#inputSobrenome').val(),
+            email:$('#inputEnd').val(),
+            mensagem:$('#exampleFormControlTextarea1').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+
+           $('#sucessoemail').show();
+           },
+        error : function(xhr,errmsg,err) {
+           $('#erroemail').show();
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
+</script>
+    
+  </body>
+</html>

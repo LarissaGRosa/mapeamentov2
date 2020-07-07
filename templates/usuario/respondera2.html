@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+      
+
+    <title>Home</title>
+  </head>
+  <body>
+      
+      <div class="mybg" style="min-height: 100vh">
+      
+          {% include 'nav-bar.html'%}
+          
+
+      <div class="container-fluid justify-content-center">
+                
+          <div class="row justify-content-center text-dark">
+                <h2>{{ pergunta.questao }}</h2>
+          </div>
+            
+            <div style="width:100%" class="d-flex justify-content-center">
+
+                <br>
+             <div style="margin:auto; width:80%; text-align:center; padding:0.2%;">
+                   <form method="POST" class="form-signin">
+                                            {% csrf_token %}
+                                            {% for alternativa in alternativas %}
+                                           <input type="radio" style="float:left:" class="form-control my-2" name="alternativa" value="{{ alternativa.id }}" checked> {{ alternativa.alternativa }}<br>
+                                            {% endfor %}
+
+                                           <button class="btn btn-lg btn-dark my-2" type="submit">Enviar</button>
+                                             <div class="control">
+
+                                          </div>
+                    </form>
+             </div>
+
+
+            </div>
+      </div>
+    </div>
+      
+      {% include 'fotters.html'%}
+          
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    
+  </body>
+</html>

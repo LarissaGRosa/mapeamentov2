@@ -1,0 +1,153 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+      
+
+    <title>Gráficos</title>
+       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+      <div class="mybg" style="min-height: 100vh">
+          
+        {% include 'nav-bar.html'%}
+          
+          <div class="container-fluid " >
+      
+              <div class="row justify-content-center" >
+          
+              <div class="col-12 text-center my-5" >
+              
+                  <h1 class="display-2 text-dark">Gráficos</h1>
+                  <p class="lead text-dark">Dê uma olhadinha em nossos gráficos, gerados a partir de dados coletados e questionários respondidos aqui mesmo!!!</p>
+              
+              </div>  
+        
+          </div>
+              
+          </div>             
+                            
+      </div>
+      
+<div class="container-fluid my-5">
+  <div class="row justify-content-sm-center">
+
+    <div class="col-sm-6 col-md-4">
+
+      <div class="card mb-5 bg-white rounded">
+
+        <div class="card-body">
+
+          <h4 class="card-title text-dark">Gráficos <i class="far fa-chart-bar" style="color:#80cc28"></i></h4>
+          <h6 class="card-subtitle mb-2 text-muted">Gerados a partir de dados coletados.</h6>
+          <button type='button' onclick="graficos()" class='btn btn-primary'>Veja mais</button>
+          
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="col-sm-6 col-md-4">
+
+      <div class="card mb-5 bg-white rounded">
+
+        <div class="card-body ">
+
+          <h4 class="card-title text-dark ">Resultados <i class="far fa-chart-bar" style="color:#80cc28"></i></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Gerados a partir de questionários respondidos.</h6>
+          <button type='button' onclick="resultados()" class='btn btn-primary'>Veja mais</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid">
+    <section id="resultados" >
+        <div class="row"  >
+         {% for r in resultados %}
+               <div class=" col-md-6 col-12 col-md-6 col-lg-4">
+
+                {{ r|safe }}
+
+                </div>
+
+              {% endfor %}
+            </div>
+
+
+    </section>
+          <section id="graficos">
+        <div class="row" >
+
+               <div class=" col-md-6 col-12 col-md-6 col-lg-6">
+
+                {{ r1|safe }}
+
+                </div>
+              <div class=" col-md-6 col-12 col-md-6 col-lg-6">
+
+                {{ r2|safe }}
+
+                </div>
+              <div class=" col-md-6 col-12 col-md-6 col-lg-6">
+
+                {{ r3|safe }}
+
+                </div>
+              <div class=" col-md-6 col-12 col-md-6 col-lg-6">
+
+                {{ r4|safe }}
+
+                </div>
+
+
+            </div>
+    </section>
+      </div>
+      
+      {% include 'fotters.html'%}
+      
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+<script>
+   $('#resultados').hide()
+    function graficos(){
+    $('#resultados').hide()
+    $('#graficos').show()
+    }
+     function resultados(){
+    $('#graficos').hide()
+    $('#resultados').show()
+    }
+
+</script>
+  </body>
+</html>

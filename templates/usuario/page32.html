@@ -1,0 +1,193 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+  <html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+
+
+
+    <title>Perfil</title>
+  </head>
+  <body>
+
+      <div class="mybg  justify-content-center" style="min-height: 100vh">
+
+ {% include 'nav-bar.html' %}
+          
+        <div class="container">
+            <div class="col-md-12 ">
+                <div class="row justify-content-center">
+                         {% if perfil.foto %}
+                         <img src="{{MEDIA_URL}}{{perfil.foto.url}}" style="height: 400px;" class="rounded">
+                        {% endif %}
+                </div>
+                    <div class="row justify-content-center">
+                        <h2  class="text-dark display-2">{{ perfil.user.user.username}}</h2>
+                    </div>
+                    <div class="row justify-content-center">
+                            <p class="text-dark display-7">
+                                {{perfil.user.user.email}}</p>
+
+                            <p class="text-dark display-7">Leciona: {{perfil.leciona}}</p>
+                    </div>
+                        <div class="row justify-content-center">
+                        <div class="mbr-section-btn pt-3 align-left">
+                            <button type="button" class="btn btn-primary display-4" data-toggle="modal" data-target="#exampleModalLong">
+                              Editar
+                        </button>
+                            </div>
+
+                        </div>
+                </div>
+              </div>
+      </div>
+  
+  
+  <div class="container container-table">
+      <h2 class="text-dark display-2">Escolas</h2>
+      <h3 class="text-dark display-5">
+             para o meu perfil</h3>
+      <div class="table-wrapper">
+        <div class="container">
+           <div class="row justify-content-end my-3">
+
+
+
+          </div>
+        </div>
+
+        <div class="container scroll">
+          <table class="table isSearch" cellspacing="0">
+            <thead>
+              <tr class="table-heads ">
+                  
+                  
+                  
+                  
+              <th class="head-item text-dark display-7">
+                      NOME</th>
+                  <th class="head-item text-dark display-7">
+                      SECRETARIA</th>
+                  <th class="head-item text-dark display-7">
+                      IsACEITO</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              
+              
+              
+              {% for e in minhas_escolas %}
+            <tr> 
+
+              <td class="body-item mbr-fonts-style display-7">{{ e.escola.nome }}</td>
+                <td class="body-item mbr-fonts-style display-7">{{ e.escola.municipio }}</td>
+                <td class="body-item mbr-fonts-style display-7">{{ e.isAceito }}</td>
+
+            </tr>
+              {% endfor %}
+                
+                
+                
+                
+             </table>
+            <form class="text-dark" method="POST" id="interest-select">
+            <h1>Adicionar escola</h1>
+            {% csrf_token %}
+            <select id="pk" name="escola" class="form-control">
+              <option disabled selected> -- selecione uma opção -- </option>
+              {% for escola in escolas %}
+              <option value={{escola.id}}>{{escola.nome}}</option>
+              {% endfor %}
+            </select>
+
+            <input type="submit" class="save btn btn-success my-2" value="Terminar"/>
+            </form>
+        </div>
+        <div class="container table-info-container">
+          <div class="row info">
+            <div class="col-md-6">
+              <div class="dataTables_info mbr-fonts-style display-7">
+                <span class="infoBefore">Mostrando</span>
+                <span class="inactive infoRows"></span>
+                <span class="infoAfter">escolas</span>
+                <span class="infoFilteredBefore">(filtered from</span>
+                <span class="inactive infoRows"></span>
+                <span class="infoFilteredAfter"> total entries)</span>
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    {% include 'fotters.html' %}
+      
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Editar perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form method="POST" enctype="multipart/form-data" class="post-form">
+                                  {% csrf_token %}
+                               {{ form|crispy }}
+
+            <button class="btn btn-lg btn-primary" style="margin:auto;" type="submit">Enviar</button>
+         </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+   <script>
+    $(document).on('submit', '#interest-select',function(e){
+
+    $.ajax({
+        type:'POST',
+        url:'{% url "perfil:escolaperfil" %}',
+        data:{
+            escola : $("#pk :selected").val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+            document.getElementById("post-form").reset();
+            alert('Sucesso!');
+            },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
+</script>
+
+  </body>
+  </html>

@@ -1,0 +1,85 @@
+
+<!doctype html>
+{% load static %}
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}"> 
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+    
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+      
+
+    <title>Perguntas</title>
+  </head>
+  <body>
+      
+      <div class="mybg" style="min-height: 100vh">
+      
+          {% include 'nav-bar.html'%}
+         {{ aux }}
+
+            {% for p in perguntas %}
+
+
+          <div class="container-fluid">
+              <div class="row justify-content-sm-center">
+
+                <div class="col-sm-6">
+
+                  <div class="card my-2 p-2 bg-white">
+
+                      <div class="top-line">
+                            <h4 class="card-title text-dark display-5">
+                                {{p.questionario}}
+                            </h4>
+                            
+                            {% if p.isDissertativa %}
+                            <p class="text-dark display-5">
+                                 <a href="{% url 'perfil:rd' pk=p.id  %}" class="t">Responder</a>
+                            </p>
+                            {% endif %}
+                            
+                            {% if p.isAlternativa %}
+                            <p class="text-dark display-5">
+                                 <a href="{% url 'perfil:ra' pk=p.id  %}" class="t" >Responder</a>
+                            </p>
+                            {% endif %}
+                           
+                        </div>
+                        <div class="bottom-line">
+                            <p class="text-dark display-7">
+                                {{p.questao}}
+                            </p>
+                        </div>
+
+                  </div>
+
+                </div>
+
+
+              </div>
+          </div>
+            {% endfor %}
+          
+
+          
+          
+      </div>
+          
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src=" {% static 'Curso/node_modules/jquery/dist/jquery.js' %}"></script>
+    <script src=" {% static 'Curso/node_modules/popper.js/dist/umd/popper.js' %}"></script>
+    <script src="  {% static 'Curso/node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    
+  </body>
+</html>
