@@ -25,7 +25,7 @@ SECRET_KEY = '6fap)#*!g-sm#5q%)!%31s%re!)-an0!!-@68b+pu&-oci0f%('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1']
+ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'mapeamentopesquisa2019.pythonanywhere.com']
 
 # Application definition
 
@@ -36,14 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'escola',
     'usuario',
     'resultado',
     'perguntas',
     'aplicativo',
     'crispy_forms',
-    'rest_framework.authtoken',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
