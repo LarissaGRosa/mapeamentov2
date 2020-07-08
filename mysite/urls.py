@@ -26,6 +26,5 @@ import resultado
 urlpatterns = [
                   path('admin/', admin.site.urls,),
                   path('usuarios/', include('usuario.urls', namespace='perfil')),
-                  path('aplicativo/', include('aplicativo.urls', namespace='mobile')),
                   path('', include('resultado.urls', namespace='noticias'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
