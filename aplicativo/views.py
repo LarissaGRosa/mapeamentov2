@@ -34,7 +34,7 @@ class LoginView(APIView):
             except:
                 token = Token.objects.create(user=user)
 
-            return Response({"token": user.auth_token.key, "perfil": perfil.tipo})
+            return Response({"token": user.auth_token.key, "perfil": perfil.tipo, "nome":user.username})
 
 
 class NoticiaList(APIView):
@@ -98,16 +98,8 @@ class Novaescola(APIView):
         senha = request.data.get('senha')
 
         response_data = {
-            "nome": nome,
-            "email": email,
-            "municipio": municipio,
-            "cod_municipio": cod_municipio,
-            "dependencia": dependencia,
-            "uf": uf,
-            "regiao": regiao,
-            "nomedeusuario": nomedeusuario,
-            "senha": senha,
-            "sucesso": "Sucesso"
+
+            "status": 1
         }
         user = User.objects.create_user(
             username=nomedeusuario,
@@ -353,14 +345,16 @@ class Escolaperfils(APIView):
                 response_data = {
                     "name": escolaperfil.professor.user.user.username,
                     "id": escolaperfil.id,
-                    "isvalidado": escolaperfil.isAceito
+                    "isvalido": escolaperfil.isAceito
                 }
                 return JsonResponse(response_data)
             else:
+                escolaperfil.isAceito = False
+                escolaperfil.save()
                 response_data = {
                     "name": escolaperfil.professor.user.user.username,
                     "id": escolaperfil.id,
-                    "isvalidado": escolaperfil.isAceito
+                    "isvalido": escolaperfil.isAceito
                 }
                 return JsonResponse(response_data)
 
@@ -450,3 +444,5 @@ class Perguntasd(APIView):
             "status": "1"
         }
         return JsonResponse(response)
+
+
