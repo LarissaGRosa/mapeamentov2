@@ -53,19 +53,25 @@ def do_login(request):
         msg = "O login dos professores está desativado"
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
-        if user.perfil.tipo == 1:
-            if ativo.ativo:
+        if user is not None:
+            if user.perfil.tipo == 1:
+                if ativo.ativo:
+                    if user is not None:
+                        login(request, user)
+                        return redirect('noticias:home')
+                else:
+                    return render(request, 'usuario/login2.html', {'msg': msg})
+            else:
                 if user is not None:
                     login(request, user)
                     return redirect('noticias:home')
-            else:
-                return render(request, 'usuario/login2.html', {'msg': msg})
+                else:
+                    return render(request, 'usuario/login2.html',  {'msg': msg})
         else:
-            if user is not None:
-                login(request, user)
-                return redirect('noticias:home')
-            else:
-                return render(request, 'usuario/login2.html',  {'msg': msg})
+
+            msg = "Esse usuário não existe"
+            return render(request, 'usuario/login2.html', {'msg': msg})
+
 
     else:
         return render(request, 'usuario/login2.html',  {'msg': msg})
