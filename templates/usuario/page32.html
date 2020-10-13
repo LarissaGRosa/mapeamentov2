@@ -22,15 +22,15 @@
   </head>
   <body>
 
-      <div class="mybg  justify-content-center" style="min-height: 100vh">
+      <div class="container-fluid mybg" style="min-height:700px">
 
  {% include 'nav-bar.html' %}
           
-        <div class="container">
+        <div class="container-fluid">
             <div class="col-md-12 ">
                 <div class="row justify-content-center">
                          {% if perfil.foto %}
-                         <img src="{{MEDIA_URL}}{{perfil.foto.url}}" style="height: 400px;" class="rounded">
+                         <img src="{{MEDIA_URL}}{{perfil.foto.url}}" style="height: 350px;" class="rounded">
                         {% endif %}
                 </div>
                     <div class="row justify-content-center">
@@ -44,7 +44,7 @@
                     </div>
                         <div class="row justify-content-center">
                         <div class="mbr-section-btn pt-3 align-left">
-                            <button type="button" class="btn btn-primary display-4" data-toggle="modal" data-target="#exampleModalLong">
+                            <button type="button" class="btn btn-dark display-4" data-toggle="modal" data-target="#exampleModalLong">
                               Editar
                         </button>
                             </div>
@@ -55,84 +55,7 @@
       </div>
   
   
-  <div class="container container-table">
-      <h2 class="text-dark display-2">Escolas</h2>
-      <h3 class="text-dark display-5">
-             para o meu perfil</h3>
-      <div class="table-wrapper">
-        <div class="container">
-           <div class="row justify-content-end my-3">
 
-
-
-          </div>
-        </div>
-
-        <div class="container scroll">
-          <table class="table isSearch" cellspacing="0">
-            <thead>
-              <tr class="table-heads ">
-                  
-                  
-                  
-                  
-              <th class="head-item text-dark display-7">
-                      NOME</th>
-                  <th class="head-item text-dark display-7">
-                      SECRETARIA</th>
-                  <th class="head-item text-dark display-7">
-                      IsACEITO</th>
-                </tr>
-            </thead>
-
-            <tbody>
-              
-              
-              
-              {% for e in minhas_escolas %}
-            <tr> 
-
-              <td class="body-item mbr-fonts-style display-7">{{ e.escola.nome }}</td>
-                <td class="body-item mbr-fonts-style display-7">{{ e.escola.municipio }}</td>
-                <td class="body-item mbr-fonts-style display-7">{{ e.isAceito }}</td>
-
-            </tr>
-              {% endfor %}
-                
-                
-                
-                
-             </table>
-            <form class="text-dark" method="POST" id="interest-select">
-            <h1>Adicionar escola</h1>
-            {% csrf_token %}
-            <select id="pk" name="escola" class="form-control">
-              <option disabled selected> -- selecione uma opção -- </option>
-              {% for escola in escolas %}
-              <option value={{escola.id}}>{{escola.nome}}</option>
-              {% endfor %}
-            </select>
-
-            <input type="submit" class="save btn btn-success my-2" value="Terminar"/>
-            </form>
-        </div>
-        <div class="container table-info-container">
-          <div class="row info">
-            <div class="col-md-6">
-              <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore">Mostrando</span>
-                <span class="inactive infoRows"></span>
-                <span class="infoAfter">escolas</span>
-                <span class="infoFilteredBefore">(filtered from</span>
-                <span class="inactive infoRows"></span>
-                <span class="infoFilteredAfter"> total entries)</span>
-              </div>
-            </div>
-            <div class="col-md-6"></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   
     {% include 'fotters.html' %}
@@ -152,7 +75,7 @@
                                   {% csrf_token %}
                                {{ form|crispy }}
 
-            <button class="btn btn-lg btn-primary" style="margin:auto;" type="submit">Enviar</button>
+            <button class="btn btn-lg btn-success" style="margin:auto;" type="submit">Enviar</button>
          </form>
       </div>
       <div class="modal-footer">
@@ -167,27 +90,7 @@
     <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'assets/popper/popper.min.js' %}"></script>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-   <script>
-    $(document).on('submit', '#interest-select',function(e){
 
-    $.ajax({
-        type:'POST',
-        url:'{% url "perfil:escolaperfil" %}',
-        data:{
-            escola : $("#pk :selected").val(),
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            action: 'post'
-        },
-        success:function(json){
-            document.getElementById("post-form").reset();
-            alert('Sucesso!');
-            },
-        error : function(xhr,errmsg,err) {
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
-    });
-});
-</script>
 
   </body>
   </html>

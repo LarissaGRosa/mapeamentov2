@@ -14,7 +14,7 @@ from perguntas.models import Pergunta, Perguntaresposta, Alternativa
 from resultado.models import Noticia
 from usuario.form import EscolaForm, ProfessorForm
 from usuario.models import Privateprofessor, Perfil, Secretaria, Formacao, Escola, Escolaperfil, Professorescola, \
-    Professor
+    Professor, Ativar
 
 
 @login_required()
@@ -25,28 +25,50 @@ def cadastro(request):
     context = {'form': form, 'form2': form2}
     if request.method == 'POST':
         if form.is_valid() and form2.is_valid():
-            save = form.save()
-            save.refresh_from_db()
-            save.perfil.tipo = 1
-            save.save()
-            perfil = Perfil.objects.get(user=save)
-            professor = form2.save(commit=False)
-            professor.user = perfil
-            professor.save()
-            context = {'msg': 'Cadastro efetuado com sucesso', 'form': form, 'form2': form2}
-            return render(request, 'usuario/cadastro2.html', context)
+            ativo = Ativar.objects.last()
+            if ativo.ativo:
+                save = form.save()
+                save.refresh_from_db()
+                save.perfil.tipo = 1
+                save.save()
+                perfil = Perfil.objects.get(user=save)
+                professor = form2.save(commit=False)
+                professor.user = perfil
+                professor.save()
+                context = {'msg': 'Cadastro efetuado com sucesso', 'form': form, 'form2': form2}
+                return render(request, 'usuario/cadastro2.html', context)
+            else:
+                context = {'msg': 'O cadastro de professores não está habilitado', 'form': form, 'form2': form2}
+                return render(request, 'usuario/cadastro2.html', context)
+
     return render(request, 'usuario/cadastro2.html', context)
 
 
 @sensitive_post_parameters()
 def do_login(request):
+    ativo = Ativar.objects.last()
+    if ativo.ativo:
+        msg = "O login dos professores está ativo"
+    else:
+        msg = "O login dos professores está desativado"
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
-        if user is not None:
-            login(request, user)
-            return redirect('noticias:home')
+        if user.perfil.tipo == 1:
+            if ativo.ativo:
+                if user is not None:
+                    login(request, user)
+                    return redirect('noticias:home')
+            else:
+                return render(request, 'usuario/login2.html', {'msg': msg})
+        else:
+            if user is not None:
+                login(request, user)
+                return redirect('noticias:home')
+            else:
+                return render(request, 'usuario/login2.html',  {'msg': msg})
+
     else:
-        return render(request, 'usuario/login2.html')
+        return render(request, 'usuario/login2.html',  {'msg': msg})
 
 
 def do_logout(request):
@@ -139,12 +161,12 @@ def secretaria(request):
     response_data = {}
     if request.POST.get('action') == 'post':
         nome = request.POST.get('nome')
-        ensinomedio = request.POST.get('ensinomedio')
         instgrad = request.POST.get('instgrad')
         cursograd = request.POST.get('cursograd')
         periodograd = request.POST.get('periodograd')
-        select = request.POST.get('selectedValue')
         iniciomagis = request.POST.get('iniciomagis')
+        idescola = request.POST.get('escola')
+        escola = Escola.objects.get(id=idescola)
 
         response_data['nome'] = nome
         response_data['tempo'] = iniciomagis
@@ -153,38 +175,29 @@ def secretaria(request):
 
         professor = Privateprofessor.objects.create(
             nome=nome,
-            ensinomedio=ensinomedio,
+            ensinomedio="x",
             secretaria=secretaria1,
             inimagisterio=iniciomagis,
+            escola=escola,
         )
         professor.save()
         response_data['id'] = professor.id
-        if select == "1":
-            Formacao.objects.create(
-                instituicao=instgrad,
-                curso=cursograd,
-                periodo=periodograd,
-                professor=professor,
-                isGraduacao=True,
-                isPosgraduacao=False
 
-            )
-        if select == "2":
-            Formacao.objects.create(
-                instituicao=instgrad,
-                curso=cursograd,
-                periodo=periodograd,
-                professor=professor,
-                isGraduacao=False,
-                isPosgraduacao=True
+        Formacao.objects.create(
+            instituicao=instgrad,
+            curso=cursograd,
+            periodo=periodograd,
+            professor=professor,
+            isGraduacao=True,
+            isPosgraduacao=False
 
-            )
+        )
 
         return JsonResponse(response_data)
 
     return render(request, 'usuario/secretaria.html',
                   {'professores': professores, 'response': response, 'response1': response1,
-                   'response2': response2, 'form': form, 'escolas': escolas, 'form':form})
+                   'response2': response2, 'form': form, 'escolas': escolas, 'form': form})
 
 
 @login_required
@@ -195,9 +208,6 @@ def cadastro_escola(request):
     response_data = {}
     if request.POST.get('action') == 'post':
         nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        municipio = request.POST.get('municipio')
-        cod_municipio = request.POST.get('cod_municipio')
         dependencia = request.POST.get('dependencia')
         uf = request.POST.get('uf')
         regiao = request.POST.get('regiao')
@@ -205,46 +215,122 @@ def cadastro_escola(request):
         senha = request.POST.get('senha')
 
         response_data['nome'] = nome
-        response_data['email'] = email
-        response_data['municipio'] = municipio
+        response_data['email'] = nomedeusuario
+        response_data['municipio'] = secretaria1.municipio
         response_data['dependencia'] = dependencia
 
         user = User.objects.create_user(
             username=nomedeusuario,
-            email=email,
+            email=nomedeusuario,
             password=senha,
 
         )
-        user.save()
 
         user.perfil.tipo = 2
         user.save()
+
         escola = Escola.objects.create(
             user=user.perfil,
             secretaria=secretaria1,
             nome=nome,
             dependencia=dependencia,
-            municipio=municipio,
-            cod_municipio=cod_municipio,
+            municipio="x",
+            cod_municipio="x",
             uf=uf,
             regiao=regiao,
         )
         escola.save()
+        response_data["id"] = escola.id
 
         return JsonResponse(response_data)
 
     return render(request, 'usuario/secretaria.html')
 
 
+def teste_nome(request):
+    perfil = Perfil.objects.get(user=request.user)
+    secretaria1 = get_object_or_404(Secretaria, user=perfil)
+    response_data = {}
+    if request.POST.get('action') == 'post':
+        nome = request.POST.get('nome')
+        try:
+            escola = Escola.objects.get(nome=nome, secretaria=secretaria1)
+        except:
+            escola = None
+        if escola:
+            response_data["result"] = "True"
+            response_data["nome"] = escola.nome
+            response_data["dependencia"] = escola.dependencia
+        else:
+            response_data["result"] = "False"
+    return JsonResponse(response_data)
+
+
+def teste_user(request):
+    perfil = Perfil.objects.get(user=request.user)
+    secretaria1 = get_object_or_404(Secretaria, user=perfil)
+    response_data = {}
+    if request.POST.get('action') == 'post':
+        nome = request.POST.get('nome')
+        try:
+            usuario = User.objects.filter(username=nome)
+        except:
+            usuario = None
+        if usuario:
+            response_data["result"] = "True"
+        else:
+            response_data["result"] = "False"
+    return JsonResponse(response_data)
+
+
+def teste_professor(request):
+    perfil = Perfil.objects.get(user=request.user)
+    try:
+        secretaria1 = get_object_or_404(Secretaria, user=perfil)
+    except:
+        secretaria1 = get_object_or_404(Escola, user=perfil)
+    response_data = {}
+    if request.POST.get('action') == 'post':
+        nome = request.POST.get('nome')
+        try:
+            usuario = Privateprofessor.objects.filter(nome=nome)
+        except:
+            usuario = None
+        if usuario:
+            response_data["result"] = "True"
+        else:
+            response_data["result"] = "False"
+    return JsonResponse(response_data)
+
+
 @login_required
 @sensitive_post_parameters()
-def get_professor(request):
+def get_professor(request, pk):
     response_data = {}
 
     if request.POST.get('action') == 'post':
         perfil = Perfil.objects.get(user=request.user)
-        secretaria = get_object_or_404(Secretaria, perfil)
+        secretaria = get_object_or_404(Secretaria, user=perfil)
         if secretaria:
+            id1 = request.POST.get('id')
+            prof = Privateprofessor.objects.get(id=id1)
+            response_data['nome'] = prof.nome
+            response_data['ensinomedio'] = prof.ensinomedio
+            response_data['iniciomagis'] = prof.inimagisterio
+            return JsonResponse(response_data)
+
+    return render(request, 'usuario/secretaria.html')
+
+
+@login_required
+@sensitive_post_parameters()
+def get_professor1(request):
+    response_data = {}
+
+    if request.POST.get('action') == 'post':
+        perfil = Perfil.objects.get(user=request.user)
+        escola= get_object_or_404(Escola, user=perfil)
+        if escola:
             id1 = request.POST.get('id')
             prof = Privateprofessor.objects.get(id=id1)
             response_data['nome'] = prof.nome
@@ -259,12 +345,12 @@ def get_professor(request):
 @sensitive_post_parameters()
 def get_escola(request):
     response_data = {}
-
+    perfil = Perfil.objects.get(user=request.user)
+    secretaria2 = get_object_or_404(Secretaria, user=perfil)
     if request.POST.get('action') == 'post':
-        perfil = Perfil.objects.get(user=request.user)
-        secretaria = get_object_or_404(Secretaria, perfil)
-        if secretaria:
-            id1 = request.POST.get('id')
+
+        if secretaria2:
+            id1 = int(request.POST.get('id'))
             escola = Escola.objects.get(id=id1)
             response_data['nome'] = escola.nome
             response_data['municipio'] = escola.municipio
@@ -282,7 +368,10 @@ def get_escola(request):
 def editar_professor(request):
     response_data = {}
     perfil = Perfil.objects.get(user=request.user)
-    secretaria1= get_object_or_404(Secretaria, user=perfil)
+    try:
+        secretaria1 = get_object_or_404(Secretaria, user=perfil)
+    except:
+        secretaria1 = get_object_or_404(Escola, user=perfil)
 
     if request.POST.get('action') == 'post':
         if secretaria1:
@@ -306,10 +395,26 @@ def editar_professor(request):
 
 @login_required
 @sensitive_post_parameters()
-def desativar_professor(request):
+def desativar_professor(request, pk):
     if request.POST.get('action') == 'post':
         perfil = Perfil.objects.get(user=request.user)
         secretaria1 = get_object_or_404(Secretaria, user=perfil)
+        if secretaria1:
+            id1 = request.POST.get('id')
+
+            professor = Privateprofessor.objects.get(id=id1)
+            professor.isAtivo = False
+            professor.save()
+            response_data = 'sucesso'
+            return JsonResponse(response_data, safe=False)
+
+
+@login_required
+@sensitive_post_parameters()
+def desativar_professor1(request):
+    if request.POST.get('action') == 'post':
+        perfil = Perfil.objects.get(user=request.user)
+        secretaria1 = get_object_or_404(Escola, user=perfil)
         if secretaria1:
             id1 = request.POST.get('id')
 
@@ -329,15 +434,44 @@ def escola(request):
     perfil = get_object_or_404(Perfil, user=request.user)
     escola1 = get_object_or_404(Escola, user=perfil)
     professor = Escolaperfil.objects.filter(escola=escola1)
-    privateprofessor = Professorescola.objects.filter(escola=escola1)
+    privateprofessor = Privateprofessor.objects.filter(escola=escola1)
     fig = go.Figure(go.Bar(x=['total de professores cadastrados pela Secretaria'],
                            y=[len(privateprofessor)]))
     plot_div = plot(fig, output_type='div', include_plotlyjs=False)
     fig1 = go.Figure(go.Bar(x=['total de usuários'],
                             y=[len(professor)]))
     plot_div1 = plot(fig1, output_type='div', include_plotlyjs=False)
+    if request.POST.get('action') == 'post':
+        nome = request.POST.get('nome')
+        instgrad = request.POST.get('instgrad')
+        cursograd = request.POST.get('cursograd')
+        periodograd = request.POST.get('periodograd')
+        iniciomagis = request.POST.get('iniciomagis')
+        response_data = {'nome': nome, 'tempo': iniciomagis, 'magis': iniciomagis, 'forma': cursograd}
 
-    return render(request, 'usuario/page22.html', {'professores': professor, 'g1': plot_div, 'g2': plot_div1,
+        professor = Privateprofessor.objects.create(
+            nome=nome,
+            ensinomedio="x",
+            secretaria=escola1.secretaria,
+            inimagisterio=iniciomagis,
+            escola=escola1,
+        )
+        professor.save()
+        response_data['id'] = professor.id
+
+        Formacao.objects.create(
+            instituicao=instgrad,
+            curso=cursograd,
+            periodo=periodograd,
+            professor=professor,
+            isGraduacao=True,
+            isPosgraduacao=False
+
+        )
+
+        return JsonResponse(response_data)
+
+    return render(request, 'usuario/page22.html', {'professores': privateprofessor, 'g1': plot_div, 'g2': plot_div1,
                                                    'escola': escola1})
 
 
@@ -400,25 +534,29 @@ def editarescolas(request):
     if request.POST.get('action') == 'post':
         id1 = request.POST.get('id')
         nome = request.POST.get('nome')
-        municipio = request.POST.get('municipio')
-        cod_municipio = request.POST.get('cod_municipio')
         dependencia = request.POST.get('dependencia')
         uf = request.POST.get('uf')
         regiao = request.POST.get('regiao')
         escola1 = Escola.objects.get(id=id1)
 
         response_data['nome'] = nome
-        response_data['municipio'] = municipio
         response_data['dependencia'] = dependencia
         escola1.nome = nome
-        escola1.municipio = municipio
-        escola1.cod_municipio = cod_municipio
+
         escola1.dependencia = dependencia
         escola1.uf = uf
         escola1.regiao = regiao
         escola1.save()
 
         return JsonResponse(response_data)
+
+
+@login_required
+@sensitive_post_parameters()
+def professores_escola(request, pk):
+    escola = Escola.objects.get(id=pk)
+    professores = Privateprofessor.objects.filter(escola=escola)
+    return render(request, "usuario/table_prof.html", {'professores': professores, 'escola': escola})
 
 
 @login_required
@@ -437,8 +575,8 @@ def professorpage(request):
             save = form
             save.save()
             return render(request, 'usuario/page32.html', {'perfil': perfil_user, 'escolas': escolas,
-                                                   'minhas_escolas': minhas_escolas,
-                                                   'perguntas': perguntas, 'form': form})
+                                                           'minhas_escolas': minhas_escolas,
+                                                           'perguntas': perguntas, 'form': form})
 
     return render(request, 'usuario/page32.html', {'perfil': perfil_user, 'escolas': escolas,
                                                    'minhas_escolas': minhas_escolas,
@@ -461,13 +599,12 @@ def escolaperfil(request):
 
 
 @login_required
-@sensitive_post_parameters()
 def responderd(request, pk):
     pergunta = Pergunta.objects.get(id=pk)
     user = get_object_or_404(User, id=request.user.id)
     if request.method == "POST":
         pergunta = Pergunta.objects.get(id=pk)
-        resposta = Perguntaresposta(id_usuario=user, id_questao=pergunta, resposta=request.POST['resposta'])
+        resposta = Perguntaresposta.objects.create(id_usuario=user, id_questao=pergunta, resposta=request.POST['resposta'])
         resposta.save()
         return redirect('perfil:perguntas')
     return render(request, 'usuario/responder2.html', {'pergunta': pergunta})
@@ -480,7 +617,7 @@ def respondera(request, pk):
     user = get_object_or_404(User, id=request.user.id)
     alternativas = Alternativa.objects.filter(id_questao=pergunta)
     if request.method == "POST":
-        resposta = Perguntaresposta(id_usuario=user, id_questao=pergunta, alternativa=request.POST['alternativa'])
+        resposta = Perguntaresposta.objects.create(id_usuario=user, id_questao=pergunta, alternativa=request.POST['alternativa'])
         resposta.save()
         return redirect('perfil:perguntas')
     return render(request, 'usuario/respondera2.html', {'pergunta': pergunta, 'alternativas': alternativas})
@@ -488,11 +625,12 @@ def respondera(request, pk):
 
 @login_required
 def perguntas(request):
-    respondidas = Perguntaresposta.objects.select_related('id_questao').filter(id_usuario=request.user)
+    user = User.objects.get(id = request.user.id)
+    respondidas = Perguntaresposta.objects.select_related('id_questao').filter(id_usuario=user)
     aux = []
     for r in respondidas:
         aux.append(r.id_questao.pk)
-    perguntas1 = Pergunta.objects.exclude(pk__in = aux)
+    perguntas1 = Pergunta.objects.exclude(pk__in=aux)
     quantidade = len(perguntas1)
     return render(request, 'perguntas/perguntas2.html', {'perguntas': perguntas1, 'quantidade': quantidade})
 
@@ -500,12 +638,17 @@ def perguntas(request):
 @login_required
 @sensitive_post_parameters()
 def administrador(request):
-    user = User.objects.get(id = request.user.id)
+    user = User.objects.get(id=request.user.id)
     perfil = Perfil.objects.get(user=user)
+    ativo = Ativar.objects.last()
+    if ativo.ativo:
+        ativado = "Ativado"
+    else:
+        ativado = "Desativado"
     if user.is_superuser:
         perguntas = Pergunta.objects.all()
         form = NoticiaForm(request.POST or None, request.FILES or None)
-        return render(request, 'usuario/adm.html', {'form': form, 'perguntas': perguntas})
+        return render(request, 'usuario/adm.html', {'form': form, 'perguntas': perguntas, 'ativo': ativado})
     else:
         return render(request, 'usuario/404.html')
 
@@ -631,3 +774,24 @@ def desativarescola(request):
             escola.delete()
             response_data = 'sucesso'
             return JsonResponse(response_data, safe=False)
+
+
+@login_required
+@sensitive_post_parameters()
+def ativaruso(request):
+    perfil = Perfil.objects.get(user=request.user)
+    secretaria1 = get_object_or_404(Secretaria, user=perfil)
+    response_data = {}
+    if request.POST.get('action') == 'post':
+        tipo = request.POST.get('tipo')
+        if tipo == "1":
+            ativo = Ativar.objects.create(ativo=True)
+        else:
+            ativo = Ativar.objects.create(ativo=False)
+        ativo.save()
+        if ativo:
+            response_data["result"] = "True"
+        else:
+            response_data["result"] = "False"
+    return JsonResponse(response_data)
+

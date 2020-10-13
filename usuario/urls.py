@@ -8,9 +8,12 @@ app_name = 'perfil'
 urlpatterns = [
     path('secretaria', views.secretaria, name='secretaria'),
     path('addescola', views.cadastro_escola, name='addescola'),
-    path('get_professor', views.get_professor, name='getprofessor'),
+    path('<int:pk>/get_professor', views.get_professor1, name='getprofessor'),
+
+    path('desativarprofessor1', views.desativar_professor1, name='desativarprofessor1'),
+    path('get_professor1', views.get_professor1, name='getprofessor1'),
     path('editar_professor', views.editar_professor, name='editarprofessor'),
-    path('desativarprofessor', views.desativar_professor, name='desativarprofessor'),
+    path('<int:pk>/desativarprofessor', views.desativar_professor, name='desativarprofessor'),
     path('escola', views.escola, name='escola'),
     path('validaescola', views.validaescola, name='mudarvinculo'),
     path('editescola', views.editar_escola, name='editescola'),
@@ -31,6 +34,13 @@ urlpatterns = [
     path('postar', views.postar, name="postar"),
     path('desativarpostagem', views.desativar_postagem, name='desativarpostagem'),
     path('desativarescola', views.desativarescola, name='desativarescola'),
-    path('getescola', views.get_escola, name='getescola')
+    path('getescola', views.get_escola, name='getescola'),
+    path('testenome', views.teste_nome, name='testenome'),
+    path('testeuser', views.teste_user, name='testeuser'),
+    path('testeprof', views.teste_professor, name='testeprof'),
+    path('<int:pk>/escolaprof', views.professores_escola, name='escolaprof'),
+    path('ativaruso', views.ativaruso, name='ativaruso')
+
+
 
 ]

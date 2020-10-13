@@ -16,7 +16,7 @@
     
       
 
-    <title>Login</title>
+    <title>Entrar</title>
   </head>
   <body>
       
@@ -30,7 +30,8 @@
 
                   <div class="col-12">
 
-                      <h1 class="display-4 text-center my-5" style="color: dimgrey">Login</h1>
+                      <h1 class="display-4 text-center my-5 text-dark"><strong>Entrar</strong></h1>
+                      <h4 class=" text-center my-5 text-dark">{{msg}}</h4>
 
                   </div>
 
@@ -38,7 +39,7 @@
 
                       <div class="col-sm-12">
 
-                          <form action="{% url 'perfil:do_login' %}" method="POST" class="form-signin" >
+                          <form action="{% url 'perfil:do_login' %}" method="POST" class="form-signin">
                               
                                 {% csrf_token  %}
 
@@ -112,7 +113,7 @@
               </div>
 
               <div class="modal-body">
-                  <p>Se você quer se cadastrar como secretaria, entre em contato conosco pelo email...</p>
+                  <p>Se você quer se cadastrar como secretaria, entre em contato conosco pelo email projetoifscgaropaba@gmail.com.</p>
                   <p>Se você é professor e quer se cadastrar, clique no botão. <a class="btn btn-outline-success" role="button" href="{% url 'perfil:cadastro' %}">Cadastrar</a></p>
                   <p>Se você quer cadastrar uma escola, entre em contato com a secretaria de seu município, pois são eles quem irão te cadastrar.</p>
               </div>

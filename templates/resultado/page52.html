@@ -22,7 +22,7 @@
   <body>
       
       
-      <div class="mybg" style="min-height: 100vh">
+      <div class="mybg" style="min-height: 85vh; max-height: 85vh">
       
           {% include 'nav-bar.html'%}
         <div class="container-fluid justify-content-center">  
@@ -58,7 +58,7 @@
                                       <div class="card mb-5 bg-white rounded mx-3   " style="min-width: 25%; max-width: 25%; min-height: 10%">
 
                                         <div class="card-body">
-                                          <img src="{{ noticia.foto.url }}" style="height:200px;" class="card-img-top">
+                                          <img src="{{ noticia.foto.url }}"  class="card-img-top">
                                           <h4 class="card-title text-dark">{{ noticia.titulo }}</h4>
                                           <p class="card-text">{{ noticia.texto }}</p>
 
@@ -72,9 +72,9 @@
 
                                      
 
+                                        {% endfor %}
 
-
-                                </div>{% endfor %}
+                                </div>
                                   
                                   
 

@@ -21,7 +21,7 @@
   </head>
   <body>
 
-      <div class="mybg" style="min-height: 100vh">
+      <div class="mybg" style="min-height: 85vh; max-height: 85vh">
 
           {% include 'nav-bar.html'%}
           <div class="container-fluid " >
@@ -41,6 +41,8 @@
 
 
       </div>
+      
+      <div class="container-fluid">
        <div id="form3" class="row justify-content-center" style="padding:20px">
 
            <div class="col-md-8 ">
@@ -50,7 +52,7 @@
                                   {% csrf_token %}
 
                                {{ form3|crispy }}
-                                <button class="btn btn-lg btn-primary" type="submit">Enviar</button>
+                                <button class="btn btn-lg btn-success" type="submit">Enviar</button>
                             </form>
                </div>
 
@@ -76,7 +78,7 @@
 
       <td>{{p.autor}}</td>
 
-      <td><button type="button" class=" btn-primary" onclick='desativar_postagem(this)' value='{{p.id}}' >Excluir</button></td>
+      <td><button type="button" class=" btn-success" onclick='desativar_postagem(this)' value='{{p.id}}' >Excluir</button></td>
     </tr>
     {% endfor %}
   </tbody>
@@ -84,7 +86,9 @@
 </div>
 
       </div>
-
+      
+      </div>
+{% include 'fotters.html'%}
 
 
     <!-- Optional JavaScript -->

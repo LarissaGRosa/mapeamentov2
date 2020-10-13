@@ -34,6 +34,7 @@ class Privateprofessor(models.Model):
     inimagisterio = models.CharField(max_length=20, null=True)
     secretaria = models.ForeignKey(Secretaria, on_delete=models.CASCADE)
     isAtivo = models.BooleanField(default=True)
+    escola = models.ForeignKey(Escola, on_delete=models.CASCADE, null=True)
 
 
 class Formacao(models.Model):
@@ -63,4 +64,8 @@ class Escolaperfil(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     escola = models.ForeignKey(Escola, on_delete=models.CASCADE)
     isAceito = models.BooleanField(default=False)
+
+
+class Ativar(models.Model):
+    ativo = models.BooleanField(default=False)
 

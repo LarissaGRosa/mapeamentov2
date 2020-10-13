@@ -1,0 +1,61 @@
+
+
+  <div class="row justify-content-center">
+
+    <div class="col-sm-6">
+
+        <h1 class="text-black-50">Novo Professor</h1>
+         <div id="teste_prof" >
+                 <form method="post" id="buscar_professor">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="nomeprofessor" required="" placeholder="Qual o nome do professor que você quer cadastrar?" data-form-field="nome">
+                    </div>
+                     <div class="text-left" id="teste_cadastro3">
+                         <button type="submit" class="btn btn-success mb-5">Conferir</button>
+                         <hr>
+                     </div>
+
+
+                 </form>
+                 <button id="c3" onclick='prox3(this)' class="btn btn-success mb-5">Continuar</button>
+         </div>
+
+      <form method="POST" id="post-form" data-form-title="Novo professor">    
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" id="nome" required="" placeholder="Nome*" data-form-field="nome">
+            </div>
+
+            <div class="form-group">
+                <input type="tel" class="form-control" id="instgrad" placeholder="Instituição de graduação" data-form-field="instgrad">
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control" id="periodograd" placeholder="Período de graduação (ex:2010-2014)" data-form-field="periodograd">
+            </div>
+
+
+            <div class="form-group">
+                <input type="tel" class="form-control" id="iniciomagis" placeholder="Início no magistério (ex: 2010)" data-form-field="iniciomagis">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" id="cursograd" rows="7" placeholder="Graduado em:" data-form-field="cursograd"></textarea>
+            </div>
+           <select multiple class="form-control" id="selectescola">
+
+
+                    {% for e in escolas %}
+                                 <option value='{{e.id}}'>{{e.nome}}</option>
+                              {% endfor %}
+                    </select>
+
+
+
+            <div class="text-left"><button type="submit" class="btn btn-success mb-5">Adicionar</button></div>
+    </form>
+
+    </div>
+
+  </div>
+

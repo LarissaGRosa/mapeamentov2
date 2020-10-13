@@ -22,7 +22,7 @@
   </head>
   <body>
 
-      <div class="mybg" style="min-height: 100vh">
+      <div class="mybg" style="min-height: 85vh; max-height: 85vh">
 
           {% include 'nav-bar.html'%}
           <div class="container-fluid " >
@@ -32,8 +32,9 @@
               <div class="col-12 text-center my-5" >
 
                   <h1 class="display-2 text-dark">Perguntas</h1>
-                     <p class="lead text-dark">Adicione ou exclua perguntas no sistema, para o item perspectivas da pesquisa!</p>
+                     <p class="lead text-dark">Adicione, exclua perguntas e libere as respostas no sistema, para o item perspectivas da pesquisa!</p>
               </div>
+
 
           </div>
 
@@ -42,30 +43,87 @@
 
 
       </div>
-      <div class="row justify-content-center" style="padding:20px">
-       <div class="col-md-12  text-center"> <h1 class="display-4"> Criar perguntas </h1></div>
-           <div class="col-md-8">
-                <form method="POST" id="pergunta-form">
-                                          {% csrf_token %}
-               <h6> Questionário </h6>
-               <input type="number" class="form-control" id="questionario" required="" placeholder="Dê a sua pergunta um número, para que possamos agrupá-la*" data-form-field="questionario">
-               <br>
-               <h6> Questão </h6>
-               <input type="text" class="form-control" id="questao" required="" placeholder="Escreva sua questão*" data-form-field="questão">
-               <br>
-               <h6>Tipo de pergunta:</h6>
-                 <select multiple class="form-control" id="tipop">
-                                      <option value="1">Dissertativa</option>
-                                      <option value="2">Múltipla escolha</option>
+        <div class="container-fluid">
+                      <div class="row justify-content-center" style="padding:20px">
+                       <div class="col-md-12 text-center"> <form method="POST" id="ativarform">
+                  {% csrf_token %}
+              <div class="col-12 text-center my-5" >
 
-                                    </select>
-               <br>
-               <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enviar</button>
+                  <h1 class="display-4 ">Atualmente o cadastro de professores está: {{ ativo }}</h1>
+                     <div class="form-group text-black-50 text-left">
+                    <label for="selectprof"><strong>Mudar status:</strong> </label>
+                    <select multiple class="form-control" id="selectprof">
+                      <option value="1">Ativar uso dos professores</option>
+                      <option value="2">Desativar uso dos professores</option>
+
+                    </select>
+                </div>
+                  <div class="text-left"><button type="submit" class="btn btn-success mb-5">Enviar</button></div>
+              </div>
+              </form></div>
+                       <div class="col-md-12  text-center"> <h1 class="display-4"> Criar perguntas </h1></div>
+                           <div class="col-md-8">
+                                <form method="POST" id="pergunta-form">
+                                                          {% csrf_token %}
+                               <h6> Questionário </h6>
+                               <input type="number" class="form-control" id="questionario" required="" placeholder="Dê a sua pergunta um número, para que possamos agrupá-la*" data-form-field="questionario">
+                               <br>
+                               <h6> Questão </h6>
+                               <input type="text" class="form-control" id="questao" required="" placeholder="Escreva sua questão*" data-form-field="questão">
+                               <br>
+                               <h6>Tipo de pergunta:</h6>
+                                 <select multiple class="form-control" id="tipop">
+                                                      <option value="1">Dissertativa</option>
+                                                      <option value="2">Múltipla escolha</option>
+
+                                                    </select>
+                               <br>
+                               <button type="submit" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">Enviar</button>
 
 
-                </form>
+                                </form>
 
-           </div>
+                           </div>
+
+                      </div>
+
+
+
+                      <div class="row justify-content-center" style="padding:20px;">
+                          <div class="col-md-8">
+
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Questão</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for p in perguntas %}
+                    <tr>
+                      <th scope="row">{{ p.id }}</th>
+                      <td>{{ p.questao }}</td>
+                        {% if p.isAlternativa == True %}
+                      <td>Múl. Escolha</td>
+                        {% else %}
+                        <td>Dissertativa</td>
+                        {% endif %}
+                      <td><button type="button" class="btn-success" onclick='desativar_pergunta(this)' value='{{p.id}}' >Excluir</button></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </div>
+
+                      </div>
+      </div>
+      
+      {% include 'fotters.html'%}
+      
+      <!--Modal-->
            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -90,7 +148,7 @@
                                             </div>
                                             <div class="row justify-content-center col-sm-12 my-2">
                                                 <button type="submit" value='0' id="getid" class="btn btn-dark mb-3">Adicionar</button>
-                                                <div id="sucessoa"><p>Sucesso!</p>
+                                                <div id="sucessoa" class="mx-2"><p>Sucesso!</p>
                                                 </div>
                                             </div>
                                         </form>
@@ -105,43 +163,6 @@
                     </div>
                   </div>
                 </div>
-
-
-
-      </div>
-
-
-
-      <div class="row justify-content-center" style="padding:20px;">
-          <div class="col-md-8">
-
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Questão</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Editar</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for p in perguntas %}
-    <tr>
-      <th scope="row">{{ p.id }}</th>
-      <td>{{ p.questao }}</td>
-        {% if p.isAlternativa == True %}
-      <td>Múl. Escolha</td>
-        {% else %}
-        <td>Dissertativa</td>
-        {% endif %}
-      <td><button type="button" class=" btn-primary" onclick='desativar_pergunta(this)' value='{{p.id}}' >Excluir</button></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-</div>
-
-      </div>
 
 
     <!-- Optional JavaScript -->
@@ -214,6 +235,35 @@
             setTimeout(function(){
                 $('#sucessoa').hide()
             }, 2000)
+
+           },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+   });
+
+  </script>
+       <script>
+       $(document).on('submit', '#ativarform',function(e){
+        e.preventDefault();
+        var select = document.getElementById("selectprof");
+        $.ajax({
+            type:'POST',
+            url:'{% url "perfil:ativaruso" %}',
+            data:{
+
+                tipo:select.options[select.selectedIndex].value,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+        success:function(json){
+           if (json.result == "True"){
+            alert('Sucesso');
+            }else{
+            alert('Erro, tento novamente');
+
+            };
 
            },
         error : function(xhr,errmsg,err) {

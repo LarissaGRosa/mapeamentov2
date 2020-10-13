@@ -1,0 +1,39 @@
+<div class="container mt-3">
+                                                <div class="col-sm-12">
+                                                        <table class="table isSearch" cellspacing="0">
+                                                        <thead>
+                                                          <tr class="table-heads text-black-50">
+
+
+
+
+                                                          <th class="head-item mbr-fonts-style display-7">
+                                                                  NOME</th><th class="head-item mbr-fonts-style display-7">
+                                                                  DEPENDENCIA ADMINISTRATIVA</th><th class="head-item mbr-fonts-style display-7">
+                                                                  EDITAR</th></tr>
+                                                        </thead>
+
+                                                          <tbody class="posts">
+
+
+                                                        {% for n in escolas %}
+
+                                                            <tr>
+                                                                <td class="body-item mbr-fonts-style display-7">{{ n.nome}}</td>
+                                                                <td class="body-item mbr-fonts-style display-7">{{ n.dependencia }}</td>
+                                                                <td class="body-item mbr-fonts-style display-7">
+                                                                    <button type="button" class="btn-success mr-1" onclick='getprofile_e(this)' value='{{n.id}}' data-toggle="modal" data-target="#exampleModal1">Editar</button>
+
+
+                                                                    <a href="{% url 'perfil:escolaprof' pk=n.id  %}" ><button  class="btn-success mr-1">Finalizar</button></a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                         </tbody>
+
+
+                                                      </table>
+
+
+                                                </div>
+                                            </div>

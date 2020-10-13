@@ -20,30 +20,38 @@
   </head>
   <body>
       
-      <div class="mybg" style="min-height: 100vh">
+      <div class="mybg" style="min-height: 95vh; max-height: 95vh">
       
           {% include 'nav-bar.html'%}
-          <br><br><br>
+          <div class="container-fluid">
+            <div class="row justify-content-center text-center">
+             
+                <h3 class="text-light">{% include 'texto/home/welcome' %}</h3>
+                
+            </div>
+            </div>
+          <br>
           <div class="explic">
       
               
                   <div class="container">
                       <div class="row">
-                      <div class="col-md-12">
-                          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="min-height:500px; max-height: 500px;">
+                      <div class="col-sm-12">
+                          <div data-interval="25000" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="min-height:520px; max-height: 520px;">
                           <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                           </ol>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
                              <div class="row justify-content-center align-items-center">
-                                  <div class="col-lg-4 col-centered">
-                                     <h1 class="display-4"> O que somos? </h1>
-                                     <h4  style="text-align:justify;">
-                                         {% include 'texto/home/o_que_somos'%}
-                                      </h4>
+                                  <div class="d-none d-md-block col-lg-4 col-centered">
+                                     <h1> Quem somos? </h1>
+                                     <p class="lead" style="text-align:justify;">
+                                         {% include 'texto/home/quem_somos'%}
+                                      </p>
                                  </div>
                                  <div class="col-lg-4 justify-content-center align-items-center" align="center">
                                      <img src="/media/class.png"  height="350px" class="img-responsive" align="center">
@@ -53,34 +61,82 @@
                              </div>
 
                             </div>
-                               <div class="carousel-item">
-                             <div class="row justify-content-center align-items-center">
-                                  <div class="d-none d-md-block col-lg-4 col-centered">
-                                     <h1 class="display-4"> Como? </h1>
-                                     <h4  style="text-align:justify;">
-                                         {% include 'texto/home/como'%}
-                                      </h4>
+                            <div class="carousel-item">
+                                
+                                 <div class="row justify-content-center align-items-center">
+                                     
+                                      <div class="d-none d-md-block col-lg-4 col-centered">
+                                          
+                                         <h1> Sobre a Pesquisa </h1>
+                                          
+                                         <p class="lead"  style="text-align:justify;">
+                                             {% include 'texto/home/sobre_pesquisa'%}
+                                          </p>
+                                          
+                                     </div>
+                                     
+                                     <div class="col-lg-4 justify-content-center align-items-center" align="center">
+                                         
+                                         <img src="/media/books.png"  height="300px" class="img-responsive" align="center">
+                                         
+                                     </div>
+                                     
                                  </div>
-                                 <div class="col-lg-4 justify-content-center align-items-center" align="center">
-                                     <img src="/media/student.png"  height="300px" class="img-responsive" align="center">
-                                 </div>
-
-
-                             </div>
 
                             </div>
-                            <div class="carousel-item ">
-                             <div class="row justify-content-center align-items-center">
-                                 
-                                    <img src="/media/learning.png"  class="img-responsive h-100" >
-                                    <div class="carousel-caption d-none d-md-block">
-
-                                        <h1 class="text-dark">Como Usar?</h1>
-                                        <p class="lead text-dark">Clique em Ver Mais... E aprenda a usar nosso site!ㅤ<a href="{% url 'noticias:posts' %}" class="badge badge-dark my-2">Ver Mais...</a> </p>
-                             </div>
+                              
+                              <div class="carousel-item">
+                                
+                                 <div class="row justify-content-center align-items-center">
+                                     
+                                      <div class="d-none d-md-block col-lg-4 col-centered">
+                                          
+                                         <h1> Guia de Usuário </h1>
+                                          
+                                         <p class="lead"  style="text-align:justify;">
+                                             {% include 'texto/home/guia_usuario'%} <button href="#" class="card-link btn btn-dark mt-2" data-toggle="modal" data-target="#siteModals">Ver Mais</button>
+                                          </p>
+                                          
+                                     </div>
+                                     
+                                     <div class="col-lg-4 justify-content-center align-items-center" align="center">
+                                         
+                                         <img src="/media/learning.png"  height="500px" class="img-responsive" align="center">
+                                         
+                                     </div>
+                                     
+                                 </div>
 
                             </div>
-                              </div>
+                              
+                            
+                              
+                              <div class="carousel-item">
+                                
+                                 <div class="row justify-content-center align-items-center">
+                                     
+                                      <div class="d-none d-md-block col-lg-4 col-centered" style="margin-top: 80px">
+                                          
+                                         <h1> Resultados</h1>
+                                          
+                                         <p class="lead"  style="text-align:justify;">
+                                             {% include 'texto/home/resultados'%} 
+                                             <br>
+                                             <a class="btn btn-dark mt-2" href="{% url 'noticias:estatisticas' %} ">Ver Mais</a>
+                                          </p>
+                                          
+                                     </div>
+                                     
+                                     <div class="col-lg-4 justify-content-center" align="center" style="margin-top: 80px">
+                                         
+                                         <img src="/media/graph.png"  height="300px" class="img-responsive" align="center">
+                                         
+                                     </div>
+                                     
+                                 </div>
+
+                            </div>
+
 
 
                           </div>
@@ -120,7 +176,7 @@
               
                   <div class="col-12 text-center">
                   
-                      <h1 class="display-4">Conheça Mais Sobre Nós</h1>
+                      <h1 class="display-4">Conheça Mais Sobre a Equipe</h1>
                       <hr>
                   
                   </div>
@@ -133,16 +189,13 @@
                       <ul class="nav nav-pills justify-content-center mb-3" id="pills-nav" role="tablist">
                       
                           <li class="nav-item">                            
-                              <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href=#nav-item-01>Como Surgiu a Ideia?</a>
+                              <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href=#nav-item-01>Pesquisadores</a>
                           </li>
                           
                           <li class="nav-item">                            
-                              <a class="nav-link" id="nav-pills-02" data-toggle="pill" href=#nav-item-02>O Que Esperamos?</a>
+                              <a class="nav-link" id="nav-pills-02" data-toggle="pill" href=#nav-item-02>Bolsistas</a>
                           </li>
                           
-                          <li class="nav-item">                            
-                              <a class="nav-link" id="nav-pills-03" data-toggle="pill" href=#nav-item-03>Quem Criou?</a>
-                          </li>
                           
                       </ul>
                       
@@ -154,13 +207,51 @@
                                   
                                   <div class="col-sm-6">
                                   
-                                      <p>1</p>
+                                      <p></p>
                                   
                                   </div>
                               
                               </div>
-                          
-                              {% include 'texto/home/como_surgiu'%}
+                            
+                              <div class="row d-flex align-items-end justify-content-start my-2">                                 
+                                    <div class="col-sm-12 d-flex align-items-end justify-content-start">                                     
+                                        <img src="/media/prof/schalata.png" height="200px" class="img-responsive rounded border border-success float-left" align="start"> 
+                                  
+                                        <p style="font-size: 16px" class="text-left ml-2">Possui graduação em CIÊNCIAS DA COMPUTAÇÃO (Bacharelado) pela UFSC - Universidade Federal de Santa Catarina (2003), graduação em FÍSICA (Licenciatura) pela UFSC (2008) e especialização em Gestão Pública (Latu Sensu) pelo CEFET-SC - Centro Federal de Educação Tecnológica de Santa Catarina (2008). É mestre em ENGENHARIA MECÂNICA (UFSC). Doutor em ENGENHARIA CIVIL (UFSC). Exerce a função de Professor de Ensino Básico, Técnico e Tecnológico, desde 2008, junto ao IFSC - Instituto Federal de Santa Catarina - Campus Garopaba, atuando principalmente nos seguintes temas: Sistemas Operacionais, Programação Orientada a Objetos, Software Livre e Manutenção de Computadores. Tem experiência em Administração e Gerência de Redes de Computadores. No doutorado, desenvolveu pesquisa de otimização de forma aplicada a área de escavação de túneis.</p>
+                                  
+                                        
+                                    </div>              
+                                  
+                                  <a class="btn btn-link float-left ml-2" href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4556743Z7" role="button">Luiz Antonio Schalata Pacheco.</a>
+                              </div> 
+                              
+                              <div class="row d-flex align-items-end justify-content-start my-2">                                 
+                                 <div class="col-sm-12 d-flex align-items-end justify-content-start">                                       
+                                        <img src="/media/prof/luana1.png" height="200px" class="img-responsive rounded border border-success float-left" align="start"> 
+                                  
+                                        
+                                    
+                                        <p style="font-size: 16px" class="text-left ml-2">Docente do ensino Básico, Técnico e Tecnológico do Instituto Federal de Santa Catarina (IFSC). Possui graduação em Letras pela Universidade Federal do Rio Grande - FURG (2008) e mestrado em Letras, na área de Estudos da Linguagem, pela Universidade Federal do Rio Grande do Sul - UFRGS- (2011). Tem experiência em Letras, com ênfase em Análises Textuais e Discursivas, atuando principalmente nos seguintes temas: Análise do Discurso, discurso político, ensino, educação a distância e Formação de Formadores. É líder do Grupo de Estudo e Pesquisa em Linguagens e Imigrações (GEPLI). Também atua como pesquisadora no Grupo de Estudos em Análise do Discurso (GEAD/FURG), ambos cadastrados no CNPq.</p>
+                                     
+                                        
+                                        
+                              </div>  
+                                  <a class="btn btn-link float-left ml-2" href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4214511Y8" role="button">Luana de Gusmão Silveira.</a>
+                              </div> 
+                              
+                              <div class="row d-flex align-items-end justify-content-start my-2">                                 
+                                                                        
+                                <div class="col-sm-12 d-flex align-items-end justify-content-start">   
+                                  
+                                  <img src="/media/prof/delcino.png" height="200px" class="img-responsive rounded border border-success float-left" align="start"> 
+                                  
+                                        
+                                    <p style="font-size: 16px" class="text-left ml-2">Possui graduação em Ciência da Computação pela Universidade Católica de Pelotas (2000), mestrado em Computação pela Universidade Federal do Rio Grande do Sul (2003) e doutorado em Engenharia de Automação e Sistemas pela Universidade Federal de Santa Catarina (2016). Atualmente é professor do Instituto Federal de Santa Catarina</p>
+                                  
+                                    
+                                </div>
+                                  <a class="btn btn-link float-left ml-2" href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4707267D2" role="button">Delcino Picinin Júnior</a>
+                              </div> 
                           
                           </div>
                           
@@ -169,14 +260,14 @@
 
                                   <div class="col-sm-6">
 
-                                      <p>2</p>
+                                      <p></p>
 
                                   </div>
 
                               </div>
 
                           
-                              {% include 'texto/home/o_que_esperamos'%}
+                              
                           
                           </div>
                           
@@ -210,7 +301,7 @@
           
               <div class="col-12">
               
-                  <h1 class="display-4 text-center my-5"><i class="fas fa-paper-plane text-success"></i>Mande Suas Dúvidas Aqui</h1>
+                  <h1 class="display-4 text-center my-5"><i class="fas fa-paper-plane text-success"></i>Deixe Seu Comentário Aqui</h1>
               
               </div>
               
@@ -224,7 +315,7 @@
                               
                               <div class="form-group col-sm-6">
                           
-                                  <label for="inputNome">Seu Nome</label>
+                                  <label for="inputNome">Nome</label>
                                   <input type="text" class="form-control" id="inputNome" placeholder="Nome">  
                                   
                               </div>
@@ -232,7 +323,7 @@
                               
                               <div class="form-group col-sm-6">
                               
-                                  <label for="inputSobrenome">Seu Sobrenome</label>
+                                  <label for="inputSobrenome">Sobrenome</label>
                                   <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome">
                               
                               
@@ -243,13 +334,13 @@
                               
                               <div class="form-group col-sm-12">
                               
-                                  <label for="inputEnd">Seu Email</label>
+                                  <label for="inputEnd">Email</label>
                                   <input type="email" class="form-control" id="inputEnd" placeholder="Email">
                               
                               </div>
                           </div>
                           <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Dúvida</label>
+                            <label for="exampleFormControlTextarea1">Mensagem</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                           </div>
 
@@ -279,6 +370,11 @@
       </div>
       
       {% include 'fotters.html'%}
+      
+      <!-- Modal -->
+      
+      {% include 'resultado/modal_user.html'%}
+      
           
       
     <!-- Optional JavaScript -->

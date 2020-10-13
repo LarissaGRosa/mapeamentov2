@@ -1,0 +1,57 @@
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title">Editar Escola</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form method="POST" id="post-form4" data-form-title="Editar professor">
+                                            <h3>Escola número:</h3><h6 id="idesc" ></h6>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="6HWg9qVFZM40FHR/0hFIyq1WOP2oEDIBRDeMuXYK8F8hr1ZHFnf9JbLvgFDlIIzcxc3iGZiJ6rUz/UtcXMk9fnKpnu5byLkIaZ75Z1N4T2Fb2oKOyp3tyuSIn9ZF1bs7" data-form-email="true">
+                                                         <div class="form-group">
+                                            <input type="text" class="form-control" id="nome3" required="" placeholder="Nome da escola*" data-form-field="nome">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="regiao3" required="" placeholder="Região*" data-form-field="regiao">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="uf3" placeholder="Estado" data-form-field="uf">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="dependencia3"  placeholder="Dependência administrativa" data-form-field="dependencia">
+                                        </div>
+
+                                                    <div class="text-xs-right"><button type="submit" class="btn btn-secondary-outline">Enviar</button></div>
+                                                </form>
+
+                                                 <table class="table isSearch" cellspacing="0">
+                                            <thead>
+                                              <tr class="table-heads ">
+
+
+
+
+                                              <th class="head-item mbr-fonts-style display-7">
+                                                      NOME</th><th class="head-item mbr-fonts-style display-7">
+                                                      DEPENDENCIA ADMINISTRATIVA</th>
+                                            </thead>
+
+                                            <tbody class="posts2">
+
+
+
+                                            </tbody>
+
+
+
+                                          </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>

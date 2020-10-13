@@ -1,0 +1,75 @@
+
+                            
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+
+            <h1 class="text-black-50">Nova Escola</h1>
+             <div >
+                 <form method="post" id="buscar_escola">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="nomeescola" required="" placeholder="Qual o nome da escola que você quer cadastrar?" data-form-field="nome">
+                    </div>
+                     <div class="text-left" id="teste_cadastro">
+                         <button type="submit" class="btn btn-success mb-5">Conferir</button>
+                         <hr>
+                     </div>
+
+
+                 </form>
+                 <button id="c1" onclick='prox1(this)' class="btn btn-success mb-5">Continuar</button>
+                 <form method="post" id="buscar_username">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="username" required="" placeholder="Escolha um nome de usuário para essa escola" data-form-field="nome">
+                    </div>
+                     <div class="text-left" id="teste_cadastro2">
+                         <button type="submit" class="btn btn-success mb-5">Conferir</button>
+                         <hr>
+                     </div>
+
+                 </form>
+
+                 <button id="c2" onclick='prox2(this)' class="btn btn-success mb-5">Continuar</button>
+             </div>
+
+              <form method="POST" id="post-form1" data-form-title="Nova Escola">
+                  {% csrf_token %}
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nome1" required="" placeholder="Nome da escola*" data-form-field="nome">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="regiao" required="" placeholder="Região*" data-form-field="regiao">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="uf" placeholder="Estado" data-form-field="uf">
+                </div>
+
+
+                <div class="form-group text-black-50 text-left">
+                    <label for="select"><strong>Dependência Administrativa</strong> </label>
+                    <select multiple class="form-control" id="select">
+                      <option value="Municipal">Municipal</option>
+                      <option value="Estadual">Estadual</option>
+                      <option value="Federal">Federal</option>
+
+                      <option value="Privada">Privada</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nomedeusuario" rows="7" placeholder="Nome de usuário, para fins de login" data-form-field="nomedeusuario">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="senha"  placeholder="Senha, para fins de login" data-form-field="senha">
+                </div>
+
+
+
+                <div class="text-left"><button type="submit" class="btn btn-success mb-5">Adicionar</button></div>
+            </form>
+        </div>
+        
+    </div>
+    

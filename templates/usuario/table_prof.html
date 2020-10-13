@@ -1,0 +1,156 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/bootstrap/compiler/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Curso/node_modules/font-awesome/css/font-awesome.css' %}">
+
+
+    <script src="https://kit.fontawesome.com/0dfab7069d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <title>Professores da escola: escola.nome</title>
+  </head>
+  <body>
+
+      <div class="container-fluid mybg" style="min-height:900px">
+
+        {% include 'nav-bar.html' %}
+
+
+                <div class="row-fluid">
+
+                    <div class="col-12">
+                        <div class="container container-table">
+                         <div class="row justify-content-end">
+                                              <div class="col-sm-8">
+
+                                                  <div class="table-wrapper">
+
+                                                      <div class="row justify-content-end mr-3">
+
+                                                        <div class="col-sm-6 text-left">
+                                                            <div class="dataTables_filter">
+                                                              <label class="searchInfo mbr-fonts-style display-7 text-black-50">Pesquisar:</label>
+                                                              <input class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                            <div class="container mt-3">
+                                                <div class="col-sm-12">
+                                                        <table class="table isSearch" cellspacing="0">
+                                                        <thead>
+                                                          <tr class="table-heads text-black-50">
+
+
+
+
+                                                          <th class=" display-7">
+                                                                  NOME</th><th class="display-7">
+                                                                  TEMPO NO MAGISTÉRIO</th><th class="head-item mbr-fonts-style display-7">
+                                                                  ENSINO MÉDIO</th><th class="head-item mbr-fonts-style display-7">
+                                                                  SECRETÁRIA</th></tr>
+                                                        </thead>
+
+                                                          <tbody class="posts">
+
+
+                                                        {% for p in professores %}
+
+                                                            <tr>
+                                                                <td class="body-item mbr-fonts-style display-7">{{ p.nome }}</td>
+                                                                <td class="body-item mbr-fonts-style display-7">{{ p.inimagisterio }}</td>
+                                                                <td class="body-item mbr-fonts-style display-7">{{p.ensinomedio}}</td>
+                                                                <td class="body-item mbr-fonts-style display-7">
+                                                                    {% csrf_token %}
+                                                                    <button type="button" class="btn-success mr-1" onclick='getprofile(this)' value='{{p.id}}' data-toggle="modal" data-target="#exampleModal">Editar</button>
+                                                                    <button type="button" class="btn-danger" onclick='desativar(this)' value='{{p.id}}' >Desativar</button>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                         </tbody>
+
+
+                                                      </table>
+                                                     {% include 'usuario/modal_prof.html' %}
+
+                                                </div>
+                                            </div>
+
+                                          </div>
+
+                    </div>
+
+                        </div>
+
+                      </div>
+</div>
+</body>
+
+
+
+
+
+
+
+      {% include 'fotters.html' %}
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'assets/web/assets/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+      <script>
+      $(document).on('submit', '#post-form3',function(e){
+
+        $.ajax({
+            type:'POST',
+            url:'{% url "perfil:editarprofessor" %}',
+            data:{
+
+                nome:$('#nome2').val(),
+                ensinomedio:$('#ensinomedio2').val(),
+                iniciomagis:$('#iniciomagis2').val(),
+                id: document.getElementById('idprof').innerHTML,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+        success:function(json){
+            document.getElementById("post-form3").reset();
+            alert('Sucesso!!');
+           },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+   });
+   </script>
+
+
+      <script src="{% static 'jquery/funcao.js' %}"></script>
+
+</html>
+

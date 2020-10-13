@@ -7,11 +7,13 @@
           <div class="container-fluid">
 
 
-            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}">IFSC</a>
+            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}"><img src="/media/icon2.png" style="height: 100px; width: 100px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSite">
+
+                <!-- Dropdown
 
                 <ul class="navbar-nav ml-auto mb-0 ">
                     <li class="nav-item dropdown">
@@ -24,16 +26,45 @@
                         </div>
                     </li>
 
+                </ul> -->
+                
+                
+                
+                <ul class="navbar-nav ml-auto mb-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Quem Somos</strong></a>
+                    </li>
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Sobre a Pesquisa</strong></a>
+                    </li>  
+                        
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#siteModals"><strong>Guia de Usuário</strong></a>
+                     </li>
+                    
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'noticias:estatisticas' %} "><strong>Resultados</strong></a>
+                    </li>
                 </ul>
-                <ul class="navbar-nav ml-0 mb-0">
+                
+                 <ul class="navbar-nav ml-0 mb-0">
+                     <li class="nav-item">
+                         <a class="nav-link text-light" href="{% url 'perfil:perguntas' %}" ><strong>Questionários</strong></a>
+                    </li>
+                </ul>               
+                
+                
+                <!-- <ul class="navbar-nav ml-0 mb-0">
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'noticias:posts' %}">Notícias</a>
                     </li>
-                </ul>
+                </ul> -->
 
-                <ul class="navbar-nav ">
+                <ul class="navbar-nav" style="margin-left: 50px !important ">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-outline-success " data-toggle="dropdown" id="navDrop">
+                        <a class="nav-link dropdown-toggle btn btn-outline-success text-light " data-toggle="dropdown" id="navDrop">
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -59,12 +90,12 @@
           <div class="container-fluid">
 
 
-            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}">IFSC</a>
+            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}"><img src="/media/icon2.png" style="height: 100px; width: 100px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSite">
-
+                <!--
                 <ul class="navbar-nav ml-auto mb-0 ">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">
@@ -77,16 +108,42 @@
                     </li>
 
                 </ul>
+                -->
+                <ul class="navbar-nav ml-auto mb-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Quem Somos</strong></a>
+                    </li>
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Sobre a Pesquisa</strong></a>
+                    </li>  
+                        
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#siteModal"><strong>Guia de Usuário</strong></a>
+                     </li>
+                    
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'noticias:estatisticas' %} "><strong>Resultados</strong></a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav ml-0 mb-0">
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'perfil:perguntas' %}"><strong>Questionários</strong></a>
+                    </li>
+                </ul>
+                <!--
                 <ul class="navbar-nav ml-0 mb-0">
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'noticias:posts' %}">Notícias</a>
                     </li>
                 </ul>
+                -->
 
-
-                <ul class="navbar-nav ">
+                <ul class="navbar-nav" style="margin-left: 50px !important">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-outline-success" data-toggle="dropdown" id="navDrop">
+                        <a class="nav-link dropdown-toggle btn btn-outline-success text-light" data-toggle="dropdown" id="navDrop">
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -113,33 +170,47 @@
           <div class="container-fluid">
 
 
-            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}">IFSC</a>
+            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}"><img src="/media/icon2.png" style="height: 100px; width: 100px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSite">
 
-                <ul class="navbar-nav ml-auto mb-0 ">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">
-                            Estatísticas
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'noticias:estatisticas' %}">Gráficos</a>
-                            <a class="dropdown-item" href="{% url 'perfil:perguntas' %}">Responder Questionários</a>
-                        </div>
+                <ul class="navbar-nav ml-auto mb-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Quem Somos</strong></a>
                     </li>
-
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Sobre a Pesquisa</strong></a>
+                    </li>  
+                        
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#siteModal"><strong>Guia de Usuário</strong></a>
+                     </li>
+                    
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'noticias:estatisticas' %} "><strong>Resultados</strong></a>
+                    </li>
                 </ul>
+                
+                <ul class="navbar-nav ml-0 mb-0">
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'perfil:perguntas' %}"><strong>Questionários</strong></a>
+                    </li>
+                </ul>
+                
+                <!--
                 <ul class="navbar-nav ml-0 mb-0">
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'noticias:posts' %}">Notícias</a>
                     </li>
                 </ul>
-
-                <ul class="navbar-nav ">
+                -->
+                <ul class="navbar-nav" style="margin-left: 50px !important">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-outline-success" data-toggle="dropdown" id="navDrop">
+                        <a class="nav-link dropdown-toggle btn btn-outline-success text-white" data-toggle="dropdown" id="navDrop">
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
@@ -167,37 +238,45 @@
           <div class="container-fluid">
 
 
-            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}">IFSC</a>
+            <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}"><img src="/media/icon2.png" style="height: 100px; width: 100px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSite">
-
-                <ul class="navbar-nav ml-auto mb-0 ">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"  data-toggle="dropdown" id="navDrop">
-                            Estatísticas
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'noticias:estatisticas' %}">Gráficos</a>
-                        </div>
+            
+                <ul class="navbar-nav ml-auto mb-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Quem Somos</strong></a>
                     </li>
-
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Sobre a Pesquisa</strong></a>
+                    </li>  
+                        
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#siteModal"><strong>Guia de Usuário</strong></a>
+                     </li>
+                    
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'noticias:estatisticas' %} "><strong>Resultados</strong></a>
+                    </li>
                 </ul>
+                <!--
                 <ul class="navbar-nav ml-0 mb-0">
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'noticias:posts' %}">Notícias</a>
                     </li>
                 </ul>
-
-                <ul class="navbar-nav ">
+                -->
+                <ul class="navbar-nav " style="margin-left: 50px !important ">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-outline-success" data-toggle="dropdown" id="navDrop">
+                        <a class="nav-link dropdown-toggle btn btn-outline-success text-light" data-toggle="dropdown" id="navDrop">
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{% url 'perfil:adm' %}">Administrar Perguntas</a>
-                            <a class="dropdown-item" href="{% url 'perfil:postar' %}">Administrar Postagens</a>
+                            <a class="dropdown-item" href="{% url 'perfil:adm' %}">Administrar Questionários</a>
+                            <!-- <a class="dropdown-item" href="{% url 'perfil:postar' %}">Administrar Postagens</a> -->
                             <a class="dropdown-item" href="{% url 'perfil:mudarsenha' %}">Mudar Senha</a>
                             <a class="dropdown-item" href="{% url 'perfil:do_logout' %}">Sair</a>
                         </div>
@@ -223,12 +302,12 @@
               <div class="container-fluid">
 
 
-                <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}">IFSC</a>
+                <a class="navbar-brand h1 mb-0 ml-0" href="{% url 'noticias:home' %}"><img src="/media/icon2.png" style="height: 100px; width: 100px"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSite">
-
+                    <!--
                     <ul class="navbar-nav ml-auto mb-0 ">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="navDrop">
@@ -240,16 +319,40 @@
                         </li>
 
                     </ul>
+                    -->
+                    
+                    <ul class="navbar-nav ml-auto mb-0" >
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href=""><strong>Quem Somos</strong></a>
+                    </li>
+                        
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/resultado/teste.html"><strong>Sobre a Pesquisa</strong></a>
+                    </li>  
+                        
+                     <li class="nav-item">
+                        <a class="nav-link text-light" href="#" data-toggle="modal" data-target="#siteModals"><strong>Guia de Usuário</strong></a>
+                     </li>
+                        
+                     <li class="nav-item">
+                         <a class="nav-link text-light" href="{% url 'noticias:estatisticas' %}"><strong>Resultados</strong></a>
+                     </li>
+                </ul>
+                    
+                    
+                    
+                    <!--
                     <ul class="navbar-nav ml-0 mb-0">
                          <li class="nav-item">
                             <a class="nav-link" href="{% url 'noticias:posts' %}">Notícias</a>
                         </li>
                     </ul>
-                    
+                    -->
 
-                    <ul class="navbar-nav ml-0">
+                    <ul class="navbar-nav" style="margin-left: 50px !important ">
                          <li class="nav-item">
-                            <a  class="btn btn-outline-success" href="{% url 'perfil:do_login' %}" >Login</a>
+                            <a  class="btn btn-outline-success text-light" href="{% url 'perfil:do_login' %}" >Entrar</a>
                         </li> 
                     </ul>
 
@@ -260,5 +363,7 @@
               </div>
           </nav>
 {% endif %}
+
+{% include 'resultado/modal_user.html'%}
 
   

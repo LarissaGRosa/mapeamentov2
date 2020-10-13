@@ -22,6 +22,30 @@
         return obj1
     };
 
+      function getprofile1(obj){
+       obj1 = obj.value
+       $.ajax({
+                type:'POST',
+                url:'get_professor1',
+                data:{
+
+                    id : obj1,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+            success:function(json){
+              $('#nome2').val(json.nome);
+              $('#ensinomedio2').val(json.nome);
+              $('#iniciomagis2').val(json.iniciomagis);
+              document.getElementById('idprof').innerHTML = obj1;
+               },
+            error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+        return obj1
+    };
+
     function getprofile_e(obj){
        obj1 = obj.value
        $.ajax({
@@ -53,6 +77,26 @@
        $.ajax({
                 type:'POST',
                 url:'desativarprofessor',
+                data:{
+
+                    id : obj1,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+            success:function(json){
+              alert('Sucesso');
+               },
+            error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+        return obj1
+  };
+  function desativar1(obj){
+       obj1 = obj.value
+       $.ajax({
+                type:'POST',
+                url:'desativarprofessor1',
                 data:{
 
                     id : obj1,
@@ -131,6 +175,10 @@
         });
         return obj1
   };
+
+
+
+
 
 
 

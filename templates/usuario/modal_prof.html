@@ -1,0 +1,37 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar professor</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form method="POST" id="post-form3" data-form-title="Editar professor">
+                                            <h3>Professor número:</h3><h6 id="idprof" ></h6>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="6HWg9qVFZM40FHR/0hFIyq1WOP2oEDIBRDeMuXYK8F8hr1ZHFnf9JbLvgFDlIIzcxc3iGZiJ6rUz/UtcXMk9fnKpnu5byLkIaZ75Z1N4T2Fb2oKOyp3tyuSIn9ZF1bs7" data-form-email="true">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="nome2" required="" placeholder="Nome*" data-form-field="nome">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="ensinomedio2" required="" placeholder="Ensino médio*" data-form-field="ensinomedio">
+                                                    </div>
+
+
+
+                                                    <div class="form-group">
+                                                        <input type="tel" class="form-control" id="iniciomagis2" placeholder="Início no magistério (ex: 2010)" data-form-field="iniciomagis">
+                                                    </div>
+
+
+
+                                                    <div class="text-xs-right"><button type="submit" class="btn btn-secondary-outline">Enviar</button></div>
+                                                </form>
+
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>

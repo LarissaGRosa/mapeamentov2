@@ -31,12 +31,13 @@
             
                   <div class="col-sm-12">
                   
-                      <form >
+                      <form method="POST" class="form-signin">
+                                    {% csrf_token %}
                       
                         <div class="row justify-content-center">
                           <div class="form-row col-sm-6 justify-content-center">
-                            <label for="exampleFormControlTextarea" class="text-dark">Resposta</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="20"></textarea>
+                            <label for="resposta"  class="text-dark">Resposta</label>
+                            <textarea class="form-control" name="resposta" id="resposta" rows="20"></textarea>
                           </div>
 
                           </div>

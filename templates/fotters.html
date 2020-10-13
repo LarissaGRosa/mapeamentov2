@@ -1,46 +1,43 @@
 {%  if user.is_authenticated %}
 
     {%  if user.perfil.tipo == 1 %}
+        
         <div class="container-fluid">
-          
-          <div class="row my-5">
-              
-              <div class="col-12"><hr></div>
 
-              
-              <div class="col-sm-4">
-              
-                  <h3>IFSC</h3>
-                  
-                  <p>Este site nasceu de um projeto do Instituto Federal de Santa Catarina, Campus Garopaba.</p>
-                  <br>
-                  <p>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+              <div class="row my-3 justify-content-center text-center">
+
+                  <div class="col-12"><hr></div>
+
+                  <div class="col-sm-12">
+
+                      <h3>Menu</h3>
+
+                      <div class="list-group list-group-flush">
+
+                          <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
+
+                          <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Resultados</a>
+                          
+                          <a class="list-group-item list-group-item-action list-group-item" href="#" data-toggle="modal" data-target="#siteModals">Guia de Usuário</a>
+                      
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Quem Somos</a>
+                      
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Sobre Pesquisa</a>
+
+                          <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
+                          
+                          
+
+                          <!-- <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a> -->
+                      
+                            <a class="dropdown-item" href="{% url 'perfil:professor' %}">Meu Perfil</a>        
 
 
-              </div>
-              
-              <div class="col-sm-4">
-              
-                  <h3>Menu</h3>
-                  
-                  <div class="list-group list-group-flush">
-                      
-                      <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
-                  
-                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Gráficos</a>
-                      
-                      <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
-                      
-                      <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a>
-                      
-                      <a class="dropdown-item" href="{% url 'perfil:professor' %}">Meu Perfil</a>                    
-                      
-                  
+                      </div>
+
                   </div>
                   
-              </div>
-              
-              <div class="col-sm-4">
+                  <!-- <div class="col-sm-4">
               
                   <h3>Social</h3>
                   
@@ -56,32 +53,111 @@
                   
                   </div>
                   
+              </div> -->
+
+
+
+
               </div>
-            
-          
+
+                 <div class="row justify-content-center text-center">
+
+                  <div class="col-12"><hr></div>
+
+                  <div class="col-sm-4">
+
+                      <h3>IFSC</h3>
+
+                      <p>{% include 'texto/rodape'%}</p>
+
+                      <p>Ícones feitos por <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+                  <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
+                  </div>
+
+
+
+              </div>
+
+
           </div>
-    
-          
-      </div>
+
     {% endif %}
 
     {% if user.perfil.tipo == 2 %}
-         <div class="container-fluid">
+
+    <div class="container-fluid">
+
+              <div class="row my-3 justify-content-center text-center">
+
+                  <div class="col-12"><hr></div>
+
+                  <div class="col-sm-12">
+
+                      <h3>Menu</h3>
+
+                      <div class="list-group list-group-flush">
+
+                          <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
+
+                          <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Resultados</a>
+                          
+                          <a class="list-group-item list-group-item-action list-group-item" href="#" data-toggle="modal" data-target="#siteModals">Guia de Usuário</a>
+                      
+                            <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Quem Somos</a>
+                      
+                          <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Sobre Pesquisa</a>
+
+                          <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
+
+                          <a class="dropdown-item" href="{% url 'perfil:escola' %}">Minha Escola</a>      
+
+
+                      </div>
+
+                  </div>
+
+
+
+
+              </div>
+
+                 <div class="row justify-content-center text-center">
+
+                  <div class="col-12"><hr></div>
+
+                  <div class="col-sm-4">
+
+                      <h3>IFSC</h3>
+
+                      <p>{% include 'texto/rodape'%}</p>
+
+                      <p>Ícones feitos por <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+                  <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
+                  </div>
+
+
+
+              </div>
+
+
+          </div>
+
+
+    {% endif %}
+
+    {%  if user.perfil.tipo == 3 %}        
+
+    <div class="container-fluid">
           
-          <div class="row my-5">
+          <div class="row my-3 justify-content-center text-center">
               
               <div class="col-12"><hr></div>
-              
-              <div class="col-sm-4">
-              
-                  <h3>IFSC</h3>
-                  
-                  <p>Este site nasceu de um projeto do Instituto Federal de Santa Catarina, Campus Garopaba.</p>
-                  <p>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
-              
-              </div>
-              
-              <div class="col-sm-4">
+                        
+              <div class="col-sm-12">
               
                   <h3>Menu</h3>
                   
@@ -89,49 +165,29 @@
                       
                       <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
                   
-                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Gráficos</a>
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Resultados</a>
                       
+                      <a class="list-group-item list-group-item-action list-group-item" href="#" data-toggle="modal" data-target="#siteModals">Guia de Usuário</a>
+                      
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Quem Somos</a>
+                      
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Sobre Pesquisa</a>
+                                                                  
                       <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
                       
-                      <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a>
-                      
-                      <a class="dropdown-item" href="{% url 'perfil:escola' %}">Minha Escola</a>                      
-                      
+                      <a href="{% url 'perfil:secretaria' %}" class="list-group-item list-group-item-action list-group-item">Minha Secretaria</a>
+                                     
                   
                   </div>
                   
               </div>
               
-              <div class="col-sm-4">
               
-                  <h3>Social</h3>
-                  
-                  <div class="list-group list-group-flush">
-                  
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Instagram</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Facebook</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Twitter</a>
-                      
-                      
-                  
-                  </div>
-                  
-              </div>
             
           
           </div>
-    
-          
-      </div>
-    {% endif %}
-
-    {%  if user.perfil.tipo == 3 %}
-
-        <div class="container-fluid">
-          
-          <div class="row my-5">
+             
+             <div class="row justify-content-center text-center">
               
               <div class="col-12"><hr></div>
               
@@ -139,50 +195,14 @@
               
                   <h3>IFSC</h3>
                   
-                  <p>Este site nasceu de um projeto do Instituto Federal de Santa Catarina, Campus Garopaba.</p>
-                  <p>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
-              
+                  <p>{% include 'texto/rodape'%}</p>
+                    
+                  <p>Ícones feitos por <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+                  <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
               </div>
               
-              <div class="col-sm-4">
-              
-                  <h3>Menu</h3>
-                  
-                  <div class="list-group list-group-flush">
-                      
-                      <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
-                  
-                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Gráficos</a>
-                      
-                      <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
-                      
-                      <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a>
-                      
-                      <a href="{% url 'perfil:secretaria' %}" class="list-group-item list-group-item-action list-group-item">Minha Secretaria</a>
-                      
-                      
-                  
-                  </div>
-                  
-              </div>
-              
-              <div class="col-sm-4">
-              
-                  <h3>Social</h3>
-                  
-                  <div class="list-group list-group-flush">
-                  
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Instagram</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Facebook</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Twitter</a>
-                      
-                      
-                  
-                  </div>
-                  
-              </div>
             
           
           </div>
@@ -196,20 +216,11 @@
         
          <div class="container-fluid">
           
-          <div class="row my-5">
+          <div class="row my-3 justify-content-center text-center">
               
               <div class="col-12"><hr></div>
-              
-              <div class="col-sm-4">
-              
-                  <h3>IFSC</h3>
-                  
-                  <p>Este site nasceu de um projeto do Instituto Federal de Santa Catarina, Campus Garopaba.</p>
-                  <p>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
-              
-              </div>
-              
-              <div class="col-sm-4">
+                        
+              <div class="col-sm-12">
               
                   <h3>Menu</h3>
                   
@@ -217,41 +228,43 @@
                       
                       <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
                   
-                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Gráficos</a>
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Resultados</a>
                       
-                      <a href="{% url 'perfil:perguntas' %}" class="list-group-item list-group-item-action list-group-item">Responder Questionários</a>
+                      <a class="list-group-item list-group-item-action list-group-item" href="#" data-toggle="modal" data-target="#siteModals">Guia de Usuário</a>
                       
-                      <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a>
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Quem Somos</a>
                       
-                      <a href="{% url 'perfil:professor' %}" class="list-group-item list-group-item-action list-group-item">Insirir Nova Postagem</a>
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Sobre Pesquisa</a>
+                                                                  
+                      <a href="{% url 'perfil:adm' %}" class="list-group-item list-group-item-action list-group-item">Administrar Questionários</a>
                       
-                      <a href="#form5" class="list-group-item list-group-item-action list-group-item">Inserir Nova Pergunta</a>
-                      
-                      <a href="#form6" class="list-group-item list-group-item-action list-group-item">Inserir Nova Alternativa</a>
-                      
-                      
+                      <!-- <a href="{% url 'perfil:postar' %}" class="list-group-item list-group-item-action list-group-item">Administrar Postagem</a> -->
+                                     
                   
                   </div>
                   
               </div>
+              
+              
+            
+          
+          </div>
+             
+             <div class="row justify-content-center text-center">
+              
+              <div class="col-12"><hr></div>
               
               <div class="col-sm-4">
               
-                  <h3>Social</h3>
+                  <h3>IFSC</h3>
                   
-                  <div class="list-group list-group-flush">
-                  
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Instagram</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Facebook</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Twitter</a>
-                      
-                      
-                  
-                  </div>
-                  
+                  <p>{% include 'texto/rodape'%}</p>
+                    
+                  <p>Ícones feitos por <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+                  <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
               </div>
+              
             
           
           </div>
@@ -263,57 +276,60 @@
         
 {% else %}
 
+    
+    
+
       <div class="container-fluid">
           
-          <div class="row my-5">
+          <div class="row my-3 justify content-center text-center">           
+              
               
               <div class="col-12"><hr></div>
-              
-              <div class="col-sm-4">
-              
-                  <h3>IFSC</h3>
-                  
-                  <p>Este site nasceu de um projeto do Instituto Federal de Santa Catarina, Campus Garopaba.</p>
-                  <p>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
-              
-              </div>
-              
-              <div class="col-sm-4">
+                
+              <div class="col-sm-12">
               
                   <h3>Menu</h3>
                   
                   <div class="list-group list-group-flush">
                       
-                      <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a>
-                  
-                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Gráficos</a>
+                      <a href="{% url 'noticias:home' %}" class="list-group-item list-group-item-action list-group-item">Início</a> 
                       
-                      <a href="{% url 'noticias:posts' %}" class="list-group-item list-group-item-action list-group-item">Notícias</a>
+                      <a class="list-group-item list-group-item-action list-group-item" href="#" data-toggle="modal" data-target="#siteModals">Guia de Usuário</a>
+                                                          
+                      <a href="{% url 'perfil:do_login' %}" class="list-group-item list-group-item-action list-group-item">Entrar</a>
                       
-                      <a href="{% url 'perfil:do_login' %}" class="list-group-item list-group-item-action list-group-item">Login</a>
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Sobre Pesquisa</a>
+                      
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Resultados</a>                    
+                                            
+                      <a href="{% url 'noticias:estatisticas' %}" class="list-group-item list-group-item-action list-group-item">Quem Somos</a>
+                      
+                      
                       
                   
                   </div>
                   
-              </div>
+              </div> 
+              
+          
+          </div>
+          
+          <div class="row justify-content-center text-center">
+              
+              <div class="col-12"><hr></div>
               
               <div class="col-sm-4">
               
-                  <h3>Social</h3>
+                  <h3>Instituto Federal de Santa Catarina</h3>
                   
-                  <div class="list-group list-group-flush">
-                  
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Instagram</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Facebook</a>
-                      
-                      <a href="#" class="list-group-item list-group-item-action list-group-item">Twitter</a>
-                      
-                      
-                  
-                  </div>
-                  
+                  <p>{% include 'texto/rodape'%}</p>
+                    
+                  <p>Ícones feitos por <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+                  <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
               </div>
+              
             
           
           </div>
