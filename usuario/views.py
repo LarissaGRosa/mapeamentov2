@@ -780,7 +780,6 @@ def desativarescola(request):
 @sensitive_post_parameters()
 def ativaruso(request):
     perfil = Perfil.objects.get(user=request.user)
-    secretaria1 = get_object_or_404(Secretaria, user=perfil)
     response_data = {}
     if request.POST.get('action') == 'post':
         tipo = request.POST.get('tipo')
